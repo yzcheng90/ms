@@ -1,17 +1,17 @@
-spring cloud 学习记录
+## spring cloud 学习记录
 
-#项目使用技术：
+## 项目使用技术：
 
 
 
-#环境：
+## 环境：
 
     - 安装redis
     - 安装rabbitmq
     - 安装jdk1.8
     - 安装FastFDS
     
-#项目结构
+## 项目结构
 ```
 ms 
 ├─logs  日志文件
@@ -73,3 +73,12 @@ ms
     
     配置多数据出现的问题集合
     https://www.cnblogs.com/jpfss/p/8295692.html
+	
+	
+	
+
+
+一起学习可以加下面QQ群，欢迎各位大神
+交流QQ群：17470566
+本人QQ：913624256
+如果喜欢，记得star fork 谢谢您的关注 x_springboot会持续维护	
