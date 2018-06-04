@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ski.ms.common.mapper.SysUserMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ski.ms.common.model.SysUser">
+        <id column="user_id" property="userId"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="mobile" property="mobile"/>
+        <result column="introduction" property="introduction" />
+        <result column="salt" property="salt"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="del_flag" property="delFlag"/>
+    </resultMap>
+
+    <!-- 返回的userEntity结果集 -->
+    <resultMap id="userEntityResultMap" type="com.ski.ms.lib.entity.UserEntity">
+        <id column="user_id" property="userId"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="mobile" property="mobile"/>
+        <result column="salt" property="salt"/>
+        <result column="introduction" property="introduction" />
+        <result column="ucreate_time" property="createTime"/>
+        <result column="uupdate_time" property="updateTime"/>
+        <result column="udel_flag" property="delFlag"/>
+
+    </resultMap>
+
+    <sql id="selectUser">
+        SELECT
+            `user`.user_id,
+            `user`.username,
+            `user`.`password`,
+            `user`.`mobile`,
+            `user`.salt,
+            `user`.introduction,
+            `user`.create_time AS ucreate_time,
+            `user`.update_time AS uupdate_time,
+            `user`.del_flag AS udel_flag
+        FROM
+            sys_user AS `user`
+    </sql>
+
+    <select id="selectUserEntityByUsername" resultMap="userEntityResultMap">
+          <include refid="selectUser"/>
+          WHERE `user`.username = #{username}
+    </select>
+
+    <select id="selectUserEntityByMobile" resultMap="userEntityResultMap">
+        <include refid="selectUser"/>
+        WHERE `user`.mobile = #{mobile}
+    </select>
+
+    <select id="selectUserVoByOpenId" resultMap="userEntityResultMap">
+        <include refid="selectUser"/>
+        WHERE `user`.salt = #{openId}
+    </select>
+
+    <select id="selectUserEntityById" resultMap="userEntityResultMap">
+         SELECT
+            `user`.user_id,
+            `user`.username,
+            `user`.`password`,
+            `user`.`mobile`,
+            `user`.salt,
+            `user`.introduction,
+            `user`.create_time AS ucreate_time,
+            `user`.update_time AS uupdate_time,
+            `user`.del_flag AS udel_flag
+        FROM
+            sys_user AS `user`
+        WHERE
+           `user`.user_id = #{id}
+    </select>
+
+    <select id="selectUserEntityPageDataScope" resultMap="userEntityResultMap" >
+        SELECT
+            `user`.user_id,
+            `user`.username,
+            `user`.`password`,
+            `user`.`mobile`,
+            `user`.salt,
+            `user`.introduction,
+            `user`.create_time AS ucreate_time,
+            `user`.update_time AS uupdate_time,
+            `user`.del_flag AS udel_flag
+        FROM
+            sys_user AS `user`
+        WHERE
+            user.del_flag = 0
+            <if test="username != null and username != ''">
+                and `user`.username LIKE CONCAT('%',#{username},'%')
+            </if>
+    </select>
+
+</mapper>

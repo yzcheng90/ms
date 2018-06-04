@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.ski.ms</groupId>
+	<artifactId>ms-main</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+
+	<name>ms-main</name>
+	<description>统一认证服务</description>
+
+	<parent>
+		<groupId>com.ski</groupId>
+		<artifactId>ms</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.ski.witschool.lib</groupId>
+			<artifactId>lib-witschool</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-oauth2</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

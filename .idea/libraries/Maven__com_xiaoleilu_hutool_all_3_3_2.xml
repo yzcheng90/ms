@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.xiaoleilu:hutool-all:3.3.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.m2/repository/com/xiaoleilu/hutool-all/3.3.2/hutool-all-3.3.2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.m2/repository/com/xiaoleilu/hutool-all/3.3.2/hutool-all-3.3.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.m2/repository/com/xiaoleilu/hutool-all/3.3.2/hutool-all-3.3.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

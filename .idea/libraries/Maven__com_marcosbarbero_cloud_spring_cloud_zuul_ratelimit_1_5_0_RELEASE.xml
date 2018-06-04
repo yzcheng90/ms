@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.marcosbarbero.cloud:spring-cloud-zuul-ratelimit:1.5.0.RELEASE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.m2/repository/com/marcosbarbero/cloud/spring-cloud-zuul-ratelimit/1.5.0.RELEASE/spring-cloud-zuul-ratelimit-1.5.0.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.m2/repository/com/marcosbarbero/cloud/spring-cloud-zuul-ratelimit/1.5.0.RELEASE/spring-cloud-zuul-ratelimit-1.5.0.RELEASE-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.m2/repository/com/marcosbarbero/cloud/spring-cloud-zuul-ratelimit/1.5.0.RELEASE/spring-cloud-zuul-ratelimit-1.5.0.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

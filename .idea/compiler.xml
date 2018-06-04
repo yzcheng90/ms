@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="common" />
+        <module name="core-config" />
+        <module name="core-gateway" />
+        <module name="core-message-queue" />
+        <module name="core-service-register" />
+        <module name="lib-witschool" />
+        <module name="main" />
+        <module name="ms-common" />
+        <module name="ms-main" />
+        <module name="ms-witschool" />
+        <module name="witschool" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="common" target="1.8" />
+      <module name="core-config" target="1.8" />
+      <module name="core-gateway" target="1.8" />
+      <module name="core-message-equeue" target="1.8" />
+      <module name="core-message-queue" target="1.8" />
+      <module name="core-service" target="1.8" />
+      <module name="core-service-register" target="1.8" />
+      <module name="lib-witschool" target="1.8" />
+      <module name="main" target="1.8" />
+      <module name="ms" target="1.8" />
+      <module name="ms-common" target="1.8" />
+      <module name="ms-main" target="1.8" />
+      <module name="ms-witschool" target="1.8" />
+      <module name="witschool" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

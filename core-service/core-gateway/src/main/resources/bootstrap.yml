@@ -1,0 +1,72 @@
+server:
+  port: 7300
+
+spring:
+  application:
+    name: ms-core-gateway
+  profiles:
+    active: dev
+  cloud:
+    config:
+      fail-fast: true
+      discovery:
+        service-id: ms-core-config
+        enabled: true
+      profile: ${spring.profiles.active}
+
+zuul:
+  ribbon:
+    eager-load:
+      enabled: true
+      clients: ms-main,ms-common
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 30000
+    socket-timeout-millis: 30000
+  routes:
+    sk-auth-service:
+      path: /auth/**
+      serviceId: ms-main
+      stripPrefix: true
+      sensitiveHeaders:
+    sk-common-service:
+      path: /common/**
+      serviceId: ms-common
+      stripPrefix: true
+      sensitiveHeaders:
+  #限流配置
+  ratelimit:
+    key-prefix: ms-core-ratelimite
+    enabled: true
+    repository: REDIS
+    behind-proxy: true
+    policies:
+      sk-common-service:
+        limit: 100
+        quota: 100
+        refresh-interval: 3
+
+urls:
+  anon:
+    - /mobile/**
+    - /auth/**
+    - /mobile/token
+    - /common/code/*
+    - /common/smsCode/*
+    - /swagger-resources/**
+    - /swagger-ui.html
+    - /*/v2/api-docs
+    - /swagger/api-docs
+
+---
+spring:
+  profiles: dev
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 20
+  client:
+    serviceUrl:
+      defaultZone: http://sk:sk172839456@localhost:7100/eureka
+    registry-fetch-interval-seconds: 10

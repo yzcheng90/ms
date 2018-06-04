@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/core-service/core-config/core-config.iml" filepath="$PROJECT_DIR$/core-service/core-config/core-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core-service/core-gateway/core-gateway.iml" filepath="$PROJECT_DIR$/core-service/core-gateway/core-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core-service/core-message-queue/core-message-queue.iml" filepath="$PROJECT_DIR$/core-service/core-message-queue/core-message-queue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core-service/core-service.iml" filepath="$PROJECT_DIR$/core-service/core-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core-service/core-service-register/core-service-register.iml" filepath="$PROJECT_DIR$/core-service/core-service-register/core-service-register.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib-witschool/lib-witschool.iml" filepath="$PROJECT_DIR$/lib-witschool/lib-witschool.iml" />
+      <module fileurl="file://F:\java_work\wit_school.v3\ms\ms-main\main.iml" filepath="F:\java_work\wit_school.v3\ms\ms-main\main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms.iml" filepath="$PROJECT_DIR$/ms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-common/ms-common.iml" filepath="$PROJECT_DIR$/ms-common/ms-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-main/ms-main.iml" filepath="$PROJECT_DIR$/ms-main/ms-main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-witschool/ms-witschool.iml" filepath="$PROJECT_DIR$/ms-witschool/ms-witschool.iml" />
+      <module fileurl="file://F:\java_work\wit_school.v3\ms\ms-witschool\witschool.iml" filepath="F:\java_work\wit_school.v3\ms\ms-witschool\witschool.iml" />
+    </modules>
+  </component>
+</project>
