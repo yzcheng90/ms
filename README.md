@@ -1,11 +1,17 @@
-##环境：
+spring cloud 学习记录
+
+#项目使用技术：
+
+
+
+#环境：
 
     - 安装redis
     - 安装rabbitmq
     - 安装jdk1.8
     - 安装FastFDS
     
-##项目结构
+#项目结构
 ```
 ms 
 ├─logs  日志文件
@@ -16,13 +22,13 @@ ms
 │  ├─core-message-queue 消息列队服务
 │  └─core-service-register 服务注册中心
 │ 
-├─lib-witschool 智慧校园公共库
+├─lib-witschool 公共库
 │ 
 ├─ms-common 公共服务
 │ 
 ├─ms-main 系统入口（统一认证中心）
 │  
-├─ms-witschool 智慧校园（微服务） 
+├─ms-witschool （微服务） 
 
 ```  
     
