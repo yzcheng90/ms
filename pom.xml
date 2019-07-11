@@ -2,165 +2,85 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.ski</groupId>
+    <groupId>com.example</groupId>
     <artifactId>ms</artifactId>
     <version>1.0.0</version>
-    <packaging>pom</packaging>
-
     <name>ms</name>
-    <description>Demo project for Spring Boot</description>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.9.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
+    <packaging>pom</packaging>
+    <description>SpringCloud微服务框架</description>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Edgware.RELEASE</spring-cloud.version>
-        <spring-boot.version>1.5.9.RELEASE</spring-boot.version>
-        <!--Lombok-->
-        <lombok.version>1.16.20</lombok.version>
-        <!--spring-boot-admin-->
-        <spring-boot-admin.version>1.5.2</spring-boot-admin.version>
-        <java-jwt.version>2.2.0</java-jwt.version>
-        <spring.jersey.version>1.5.3.RELEASE</spring.jersey.version>
-
-        <!--验证码-->
+        <spring-boot.version>2.1.3.RELEASE</spring-boot.version>
+        <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+        <spring-platform.version>Cairo-SR7</spring-platform.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <hutool.version>4.4.5</hutool.version>
+        <mybatis-plus.version>3.0.6</mybatis-plus.version>
         <kaptcha.version>0.0.9</kaptcha.version>
-        <ttl.version>2.2.0</ttl.version>
-        <sharding-jdbc-core-spring-boot-starter.version>2.0.1</sharding-jdbc-core-spring-boot-starter.version>
-        <velocity-engine-core.version>2.0</velocity-engine-core.version>
+        <swagger.version>2.9.2</swagger.version>
+        <mysql.connector.version>8.0.13</mysql.connector.version>
+        <security.oauth.version>2.3.4.RELEASE</security.oauth.version>
+        <security.oauth.auto.version>2.1.2.RELEASE</security.oauth.auto.version>
+        <curator.version>2.10.0</curator.version>
+        <jackson.modules>2.9.6</jackson.modules>
 
-        <swagger2.version>2.8.0</swagger2.version>
-        <fastdfs.version>0.2.0</fastdfs.version>
-
-        <jjwt.version>0.9.0</jjwt.version>
-        <fastjson.version>1.2.46</fastjson.version>
-        <hutool.version>3.3.2</hutool.version>
-        <commons-io.version>2.6</commons-io.version>
-        <jasypt.version>1.18</jasypt.version>
-
-        <druid.version>1.1.3</druid.version>
-        <dynamic.datasource>1.3.0</dynamic.datasource>
-        <mybatis-plus.version>2.1.9</mybatis-plus.version>
-        <mybatisplus-spring-boot-starter.version>1.0.5</mybatisplus-spring-boot-starter.version>
     </properties>
 
-
-
     <modules>
-        <module>ms-main</module>
+        <module>ms-eureka</module>
+        <module>ms-admin</module>
+        <module>ms-gateway</module>
+        <module>ms-config</module>
+        <module>ms-auth</module>
         <module>ms-common</module>
-        <module>ms-witschool</module>
-        <module>lib-witschool</module>
-        <module>core-service</module>
     </modules>
 
-
     <dependencies>
-        <!--spring cloud-->
+        <!--eureka 客户端-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter</artifactId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
-        <!-- eureka注册中心 -->
+        <!--配置文件处理器-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!--断路器依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka-server</artifactId>
-        </dependency>
-
-        <!--配置中心-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
-
-        <!--熔断服务-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.netflix.hystrix</groupId>
-            <artifactId>hystrix-javanica</artifactId>
-        </dependency>
-
-        <!-- redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
         </dependency>
 
         <!--Lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
-
-     <!--  <dependency>
-          <groupId>com.sukeintel.lib</groupId>
-          <artifactId>ski_sharelib_core</artifactId>
-          <version>1.0.1-SNAPSHOT</version>
-        </dependency>-->
     </dependencies>
 
-    <!--sping cloud admin 相关-->
+
+
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-server</artifactId>
-                <version>${spring-boot-admin.version}</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-server-ui</artifactId>
-                <version>${spring-boot-admin.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-server-ui-hystrix</artifactId>
-                <version>${spring-boot-admin.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-server-ui-turbine</artifactId>
-                <version>${spring-boot-admin.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-server-ui-login</artifactId>
-                <version>${spring-boot-admin.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>io.spring.platform</groupId>
                 <artifactId>platform-bom</artifactId>
-                <version>Brussels-SR6</version>
+                <version>${spring-platform.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -171,53 +91,85 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!--jackson模块-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-modules-java8</artifactId>
+                <version>${jackson.modules}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--稳定版本，替代spring security bom内置-->
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${security.oauth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security.oauth.boot</groupId>
+                <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+                <version>${security.oauth.auto.version}</version>
+            </dependency>
+
+            <!--mybatis plus extension,包含了mybatis plus core-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!--mybatis-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!--mysql 驱动-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.connector.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
-
-    <repositories>
-        <repository>
-            <id>aliyun</id>
-            <name>aliyun</name>
-            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
-        </repository>
-        <repository>
-            <id>nexus-releases</id>
-            <name>SKI Nexus Release Repository</name>
-            <url>http://192.168.0.8:9000/repository/maven-releases/</url>
-        </repository>
-        <repository>
-            <id>nexus-snapshots</id>
-            <name>SKI Nexus Snapshots Repository</name>
-            <url>http://192.168.0.8:9000/repository/maven-snapshots/</url>
-        </repository>
-    </repositories>
-
     <build>
+        <finalName>${project.name}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>${spring-boot.version}</version>
+                    <configuration>
+                        <finalName>${project.build.finalName}</finalName>
+                    </configuration>
                     <executions>
                         <execution>
                             <goals>
-                                <goal>build-info</goal>
+                                <goal>repackage</goal>
                             </goals>
                         </execution>
                     </executions>
                 </plugin>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <target>${java.version}</target>
-                        <source>${java.version}</source>
-                        <encoding>UTF-8</encoding>
-                    </configuration>
-                </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <target>${maven.compiler.target}</target>
+                    <source>${maven.compiler.source}</source>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
-
 </project>

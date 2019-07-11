@@ -1,0 +1,24 @@
+# 数据源
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: PP55PP55
+    url: jdbc:mysql://192.168.0.201:3306/demo1?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&allowMultiQueries=true
+
+## spring security 配置
+security:
+  oauth2:
+    client:
+      client-id: cloudx
+      client-secret: cloudx
+      scope: server
+      # 默认放行url,子模块重写时application-dev.yml中的公共配置会被覆盖,所以要把公共配置中的放行url再写一次
+      ignore-urls:
+        - /actuator/**
+        - /v2/api-docs
+        - /user/info/*
+        - /social/info/*
+        - /mobile/*
+        - /log/save

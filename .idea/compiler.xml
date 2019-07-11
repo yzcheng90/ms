@@ -6,34 +6,31 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="common" />
-        <module name="core-config" />
-        <module name="core-gateway" />
-        <module name="core-message-queue" />
-        <module name="core-service-register" />
-        <module name="lib-witschool" />
-        <module name="main" />
-        <module name="ms-common" />
-        <module name="ms-main" />
-        <module name="ms-witschool" />
-        <module name="witschool" />
+        <module name="cloudx-admin" />
+        <module name="eureka1" />
+        <module name="ms-admin" />
+        <module name="ms-auth" />
+        <module name="ms-common-core" />
+        <module name="ms-common-gateway" />
+        <module name="ms-common-resource" />
+        <module name="ms-config" />
+        <module name="ms-eureka" />
+        <module name="ms-gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="common" target="1.8" />
-      <module name="core-config" target="1.8" />
-      <module name="core-gateway" target="1.8" />
-      <module name="core-message-equeue" target="1.8" />
-      <module name="core-message-queue" target="1.8" />
-      <module name="core-service" target="1.8" />
-      <module name="core-service-register" target="1.8" />
-      <module name="lib-witschool" target="1.8" />
-      <module name="main" target="1.8" />
+      <module name="cloudx-admin" target="1.8" />
+      <module name="eureka1" target="1.8" />
       <module name="ms" target="1.8" />
+      <module name="ms-admin" target="1.8" />
+      <module name="ms-auth" target="1.8" />
       <module name="ms-common" target="1.8" />
-      <module name="ms-main" target="1.8" />
-      <module name="ms-witschool" target="1.8" />
-      <module name="witschool" target="1.8" />
+      <module name="ms-common-core" target="1.8" />
+      <module name="ms-common-gateway" target="1.8" />
+      <module name="ms-common-resource" target="1.8" />
+      <module name="ms-config" target="1.8" />
+      <module name="ms-eureka" target="1.8" />
+      <module name="ms-gateway" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
