@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd4984e8-cbbf-4d6f-a56f-0777f38df395" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_oauth_spring_security_oauth2_2_3_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_oauth_spring_security_oauth2_2_3_5_RELEASE.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ms-admin/ms-admin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ms-admin/ms-admin.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ms-common/ms-common-resource/ms-common-resource.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ms-common/ms-common-resource/ms-common-resource.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -51,11 +47,11 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="CustomRedisRateLimiter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ms-gateway/src/main/java/com/example/getway/config/CustomRedisRateLimiter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
+            <state relative-caret-position="2128">
               <caret line="112" column="52" selection-start-line="112" selection-start-column="52" selection-end-line="112" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -77,7 +73,9 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="-1030" />
+              <first_editor relative-caret-position="19">
+                <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+              </first_editor>
               <second_editor />
             </state>
           </provider>
@@ -131,7 +129,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ms-auth/src/main/resources/bootstrap.yml" />
         <option value="$PROJECT_DIR$/ms-common/ms-common-core/src/main/java/com/example/common/core/entity/SysSocialDetails.java" />
         <option value="$PROJECT_DIR$/ms-common/ms-common-resource/src/main/java/com/example/common/resource/security/CustomResourceBeanDefinitionRegistrar.java" />
         <option value="$PROJECT_DIR$/ms-common/ms-common-resource/src/main/java/com/example/common/resource/security/ResourceAuthExceptionEntryPoint.java" />
@@ -182,6 +179,7 @@
         <option value="$PROJECT_DIR$/ms-auth/src/main/resources/mapper/AuthenticationUserMapper.xml" />
         <option value="$PROJECT_DIR$/ms-gateway/src/main/java/com/example/getway/config/RateLimiterConfiguration.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -200,7 +198,17 @@
   </component>
   <component name="MavenProjectNavigator">
     <treeState>
-      <expand />
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="ms" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="ms" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
       <select />
     </treeState>
   </component>
@@ -411,12 +419,13 @@
       <workItem from="1562743201163" duration="9587000" />
       <workItem from="1562805543259" duration="9439000" />
       <workItem from="1562816714000" duration="13498000" />
-      <workItem from="1562834361104" duration="875000" />
+      <workItem from="1562834361104" duration="983000" />
+      <workItem from="1562837067861" duration="52000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="164964000" />
+    <option name="totallyTimeSpent" value="165124000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -432,15 +441,14 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.24148937" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.24148937" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.27765957" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="bottom" id="Java Enterprise" order="7" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.43889478" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.43829787" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32943678" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21510416" />
@@ -453,6 +461,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="JRebel Console" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.27765957" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="JRebel" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -834,9 +843,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
           <caret line="39" selection-start-line="39" selection-end-line="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -871,7 +877,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ms-gateway/src/main/java/com/example/getway/config/CustomRedisRateLimiter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
+        <state relative-caret-position="2128">
           <caret line="112" column="52" selection-start-line="112" selection-start-column="52" selection-end-line="112" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -889,7 +895,9 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-1030" />
+          <first_editor relative-caret-position="19">
+            <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+          </first_editor>
           <second_editor />
         </state>
       </provider>
