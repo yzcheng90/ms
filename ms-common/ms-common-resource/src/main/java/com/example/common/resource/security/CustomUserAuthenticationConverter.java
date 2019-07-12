@@ -16,6 +16,7 @@ import java.util.Map;
  */
 public class CustomUserAuthenticationConverter implements UserAuthenticationConverter {
 	private static final String USER_ID = "user_id";
+	private static final String LIMIT_LEVEL = "limit_level";
 	private static final String N_A = "N/A";
 
 	/**
@@ -47,8 +48,10 @@ public class CustomUserAuthenticationConverter implements UserAuthenticationConv
 
 			String username = (String) map.get(USERNAME);
 			Integer id = (Integer) map.get(USER_ID);
+			Integer limit_level = (Integer) map.get(LIMIT_LEVEL);
 			CustomUserDetailsUser user = new CustomUserDetailsUser(
 					id,
+					limit_level,
 					username,
 					N_A,
 					true,

@@ -1,4 +1,4 @@
-package com.example.common.resource.cache;
+package com.example.common.cache.config;
 
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;

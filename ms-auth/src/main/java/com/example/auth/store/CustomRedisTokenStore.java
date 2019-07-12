@@ -168,10 +168,10 @@ public class CustomRedisTokenStore implements TokenStore {
 
 	@Override
 	public void storeAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
-		CustomUserDetailsUser customUserDetailsUser = (CustomUserDetailsUser) authentication.getPrincipal();
+		CustomUserDetailsUser customUser = (CustomUserDetailsUser) authentication.getPrincipal();
 		byte[] serializedAccessToken = serialize(token);
 		byte[] serializedAuth = serialize(authentication);
-		byte[] serializedAuthUser = serialize(StoreUser.builder().userId(customUserDetailsUser.getUserId()).userName(customUserDetailsUser.getUsername()).build());
+		byte[] serializedAuthUser = serialize(StoreUser.builder().userId(customUser.getUserId()).limitLevel(customUser.getLimitLevel()).userName(customUser.getUsername()).build());
 		byte[] accessKey = serializeKey(ACCESS + token.getValue());
 		byte[] authKey = serializeKey(AUTH + token.getValue());
 		byte[] authUserKey = serializeKey(AUTH_USER + token.getValue());
@@ -243,9 +243,21 @@ public class CustomRedisTokenStore implements TokenStore {
 		}
 	}
 
+	public void updateUserLimitLevel(CustomUserDetailsUser customUser,String token){
+		byte[] serializedAuthUser = serialize(StoreUser.builder().userId(customUser.getUserId()).limitLevel(customUser.getLimitLevel()).userName(customUser.getUsername()).build());
+		byte[] authUserKey = serializeKey(AUTH_USER + token);
+		RedisConnection conn = getConnection();
+		try{
+			conn.openPipeline();
+			conn.set(authUserKey, serializedAuthUser);
+			conn.closePipeline();
+		}finally {
+			conn.close();
+		}
+	}
+
 	private static String getApprovalKey(OAuth2Authentication authentication) {
-		String userName = authentication.getUserAuthentication() == null ? ""
-				: authentication.getUserAuthentication().getName();
+		String userName = authentication.getUserAuthentication() == null ? "": authentication.getUserAuthentication().getName();
 		return getApprovalKey(authentication.getOAuth2Request().getClientId(), userName);
 	}
 

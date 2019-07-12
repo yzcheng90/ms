@@ -16,9 +16,30 @@ public interface SecurityConstants {
     String BCRYPT = "{bcrypt}";
 
     /**
-     * 内部调用
+     * 用户ID
      */
-    String CLOUD_X = "cloud-x";
+    String USER_ID = "user_id";
+
+    /**
+     * token key 前坠
+     */
+    String MS_OAUTH_PREFIX = "ms_oauth:";
+
+
+    /**
+     * token key
+     */
+    String ACCESS = "access:";
+
+    /**
+     * 用户名
+     */
+    String USER_NAME = "username";
+
+    /**
+     * 限流等级
+     */
+    String LIMIT_LEVEL = "limit_level";
 
     /**
      * redis key oauth 客户端信息

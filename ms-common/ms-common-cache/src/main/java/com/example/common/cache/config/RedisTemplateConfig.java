@@ -1,4 +1,4 @@
-package com.example.common.resource.cache;
+package com.example.common.cache.config;
 
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;

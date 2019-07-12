@@ -41,6 +41,7 @@ public class UserDetailsUtils {
         // 构造security用户
         return new CustomUserDetailsUser(
                 user.getUserId(),
+                user.getLimitLevel(),
                 user.getUsername(),
                 SecurityConstants.BCRYPT + user.getPassword(),
                 enabled,

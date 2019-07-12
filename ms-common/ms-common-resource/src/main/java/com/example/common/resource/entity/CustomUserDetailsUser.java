@@ -1,6 +1,7 @@
 package com.example.common.resource.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import java.util.Collection;
@@ -13,11 +14,19 @@ import java.util.Collection;
 public class CustomUserDetailsUser extends User {
 
     @Getter
+    @Setter
     public Integer userId;
+    /**
+     * 限流等级
+     */
+    @Getter
+    @Setter
+    private Integer limitLevel;
 
     /**
      *
      * @param userId
+     * @param limitLevel
      * @param username
      * @param password
      * @param enabled
@@ -26,8 +35,9 @@ public class CustomUserDetailsUser extends User {
      * @param accountNonLocked
      * @param authorities
      */
-    public CustomUserDetailsUser(Integer userId, String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
+    public CustomUserDetailsUser(Integer userId,Integer limitLevel, String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
         this.userId = userId;
+        this.limitLevel = limitLevel;
     }
 }

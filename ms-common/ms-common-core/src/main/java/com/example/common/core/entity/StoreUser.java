@@ -16,5 +16,6 @@ import java.io.Serializable;
 @Builder
 public class StoreUser implements Serializable {
     private int userId;
+    private int limitLevel;
     private String userName;
 }

@@ -8,5 +8,10 @@ public interface ServiceNameConstants {
     /**
      * ADMIN模块
      */
-    String ADMIN_SERVICE = "admin";
+    String MS_ADMIN_SERVICE = "ms-admin";
+
+    /**
+     * AUTH模块
+     */
+    String MS_AUTH_SERVICE = "ms-auth";
 }

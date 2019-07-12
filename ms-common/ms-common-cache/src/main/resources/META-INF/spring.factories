@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.example.common.cache.config.RedisTemplateConfig,\
+    com.example.common.cache.config.CacheManagerConfig

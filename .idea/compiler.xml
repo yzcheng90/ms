@@ -10,6 +10,7 @@
         <module name="eureka1" />
         <module name="ms-admin" />
         <module name="ms-auth" />
+        <module name="ms-common-cache" />
         <module name="ms-common-core" />
         <module name="ms-common-gateway" />
         <module name="ms-common-resource" />
@@ -25,6 +26,7 @@
       <module name="ms-admin" target="1.8" />
       <module name="ms-auth" target="1.8" />
       <module name="ms-common" target="1.8" />
+      <module name="ms-common-cache" target="1.8" />
       <module name="ms-common-core" target="1.8" />
       <module name="ms-common-gateway" target="1.8" />
       <module name="ms-common-resource" target="1.8" />

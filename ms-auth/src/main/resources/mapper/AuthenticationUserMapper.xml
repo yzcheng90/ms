@@ -15,6 +15,7 @@
 		<result column="uupdate_time" property="updateTime"/>
 		<result column="lock_flag" property="lockFlag"/>
 		<result column="udel_flag" property="delFlag"/>
+		<result column="limit_level" property="limitLevel"/>
 	</resultMap>
 
 
@@ -30,7 +31,8 @@
 		`user`.create_time AS ucreate_time,
 		`user`.update_time AS uupdate_time,
 		`user`.del_flag AS udel_flag,
-		`user`.lock_flag AS lock_flag
+		`user`.lock_flag AS lock_flag,
+		`user`.limit_level AS limit_level
 	</sql>
 
 

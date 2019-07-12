@@ -72,5 +72,9 @@ public class SysUser implements Serializable {
 	 * QQ openid
 	 */
 	private String qqOpenid;
+	/**
+	 * 限流等级
+	 */
+	private Integer limitLevel;
 
 }

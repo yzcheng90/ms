@@ -33,12 +33,6 @@
             <artifactId>spring-security-oauth2-autoconfigure</artifactId>
         </dependency>
 
-        <!--缓存依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
         <!--hibernate-validator-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

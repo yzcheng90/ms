@@ -61,7 +61,8 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             .antMatchers(
-                    "/token/**", //token 开头不拦截
+                    "/token/login", // 不拦截
+                    "/token/form", // 不拦截
                     "/actuator/**", //actuator（监控） 开头不拦截
                     "/mobile/**")  //mobile（手机） 开头不拦截
             .permitAll()

@@ -92,12 +92,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Bean
     public TokenStore tokenStore() {
         CustomRedisTokenStore tokenStore = new CustomRedisTokenStore(redisConnectionFactory);
+        tokenStore.setPrefix(SecurityConstants.MS_OAUTH_PREFIX);
         return tokenStore;
     }
 
     /**
-     * token增强，客户端模式不增强。
-     *
+     * token 属性附加。
      * @return TokenEnhancer
      */
     @Bean
@@ -109,8 +109,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
             final Map<String, Object> additionalInfo = new HashMap<>(8);
             CustomUserDetailsUser customUserDetailsUser = (CustomUserDetailsUser) authentication.getUserAuthentication().getPrincipal();
-            additionalInfo.put("user_id", customUserDetailsUser.getUserId());
-            additionalInfo.put("username", customUserDetailsUser.getUsername());
+            additionalInfo.put(SecurityConstants.USER_ID, customUserDetailsUser.getUserId());
+            additionalInfo.put(SecurityConstants.LIMIT_LEVEL, customUserDetailsUser.getLimitLevel());
+            additionalInfo.put(SecurityConstants.USER_NAME, customUserDetailsUser.getUsername());
             ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
             return accessToken;
         };

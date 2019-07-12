@@ -13,6 +13,7 @@
         <module>ms-common-core</module>
         <module>ms-common-resource</module>
         <module>ms-common-gateway</module>
+        <module>ms-common-cache</module>
     </modules>
     <artifactId>ms-common</artifactId>
     <description>公共模块</description>
