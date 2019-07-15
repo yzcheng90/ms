@@ -16,6 +16,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>ms-common-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
 </project>

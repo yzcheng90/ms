@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2019-07-12 15:24:52
+Date: 2019-07-15 15:52:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,6 +40,28 @@ CREATE TABLE `sys_oauth_client_details` (
 INSERT INTO `sys_oauth_client_details` VALUES ('api', null, 'api', 'server', 'client_credentials', null, null, null, null, null, 'true');
 INSERT INTO `sys_oauth_client_details` VALUES ('app', null, 'app', 'server', 'password,refresh_token', null, null, null, null, null, 'true');
 INSERT INTO `sys_oauth_client_details` VALUES ('cloudx', null, 'cloudx', 'server', 'password,refresh_token,client_credentials', 'www.baidu.com', null, null, null, null, 'true');
+
+-- ----------------------------
+-- Table structure for sys_rate_limiter
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_rate_limiter`;
+CREATE TABLE `sys_rate_limiter` (
+  `limit_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `level` varchar(255) NOT NULL COMMENT '等级',
+  `replenish_rate` int(11) NOT NULL COMMENT '流速',
+  `burst_capacity` int(11) NOT NULL COMMENT '桶容量',
+  `limit_type` int(10) NOT NULL COMMENT '单位 1:秒，2:分钟，3:小时，4:天',
+  PRIMARY KEY (`limit_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_rate_limiter
+-- ----------------------------
+INSERT INTO `sys_rate_limiter` VALUES ('1', '1', '10', '10', '1');
+INSERT INTO `sys_rate_limiter` VALUES ('2', '2', '20', '20', '1');
+INSERT INTO `sys_rate_limiter` VALUES ('3', '3', '30', '30', '2');
+INSERT INTO `sys_rate_limiter` VALUES ('4', '4', '40', '40', '1');
+INSERT INTO `sys_rate_limiter` VALUES ('5', '5', '500', '500', '1');
 
 -- ----------------------------
 -- Table structure for sys_user

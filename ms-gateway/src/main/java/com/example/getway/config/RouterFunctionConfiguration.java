@@ -2,8 +2,6 @@ package com.example.getway.config;
 
 import com.example.getway.handler.HystrixFallbackHandler;
 import lombok.AllArgsConstructor;
-import org.springframework.cloud.gateway.route.RouteLocator;
-import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -22,7 +20,6 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 public class RouterFunctionConfiguration {
 
     private final HystrixFallbackHandler hystrixFallbackHandler;
-
 
     @Bean
     public RouterFunction routerFunction() {

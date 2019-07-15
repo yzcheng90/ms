@@ -16,20 +16,19 @@ public interface SecurityConstants {
     String BCRYPT = "{bcrypt}";
 
     /**
-     * 用户ID
-     */
-    String USER_ID = "user_id";
-
-    /**
-     * token key 前坠
+     * token key 前缀
      */
     String MS_OAUTH_PREFIX = "ms_oauth:";
-
 
     /**
      * token key
      */
     String ACCESS = "access:";
+
+    /**
+     * 用户ID
+     */
+    String USER_ID = "user_id";
 
     /**
      * 用户名
@@ -44,7 +43,7 @@ public interface SecurityConstants {
     /**
      * redis key oauth 客户端信息
      */
-    String CLIENT_DETAILS_KEY = "cloud_x_oauth:client:details";
+    String CLIENT_DETAILS_KEY = "ms_oauth:client:details";
 
     String CACHE_USER_DETAILS = "cache_user_details";
 

@@ -1,5 +1,6 @@
 package com.example.getway.config;
 
+import cn.hutool.core.collection.CollUtil;
 import com.example.common.core.constants.CommonConstants;
 import com.example.common.core.constants.SecurityConstants;
 import com.example.common.core.entity.StoreUser;
@@ -39,14 +40,13 @@ public class RateLimiterConfiguration {
     public KeyResolver principalNameKeyResolver(){
         return exchange -> {
             List<String> authorization = exchange.getRequest().getHeaders().get(CommonConstants.AUTHORIZATION);
-            if(authorization != null && authorization.size() != 0){
+            if(CollUtil.isNotEmpty(authorization)){
                 String token = authorization.get(0);
                 token = token.substring(token.indexOf(CommonConstants.PREFIX) + 1,token.length());
                 String key = SecurityConstants.MS_OAUTH_PREFIX + CommonConstants.AUTH_USER + token;
                 byte[] principal = redisTemplate.getConnectionFactory().getConnection().get(redisTokenStoreSerializationStrategy.serialize(key));
                 if(principal != null){
                     StoreUser principalStr = redisTokenStoreSerializationStrategy.deserialize(principal,StoreUser.class);
-                    log.error("-----------------------"+principalStr);
                     return Mono.just(principalStr.getLimitLevel() == 0 ? CommonConstants.DEFAULT_LEVEL : String.valueOf(principalStr.getLimitLevel()));
                 }
             }

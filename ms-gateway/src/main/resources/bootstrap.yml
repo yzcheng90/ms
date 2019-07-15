@@ -44,13 +44,6 @@ spring:
               name: fallbackcmd
               fallbackUri: forward:/fallback
 
-#限流等级配置  [0]:replenishRate(流速)  [1]:burstCapacity(令牌桶大小)
-rate-limiter-levels:
-  levels:
-    1: 10,10
-    2: 50,50
-    3: 100,100
-
 # 注册中心配置
 eureka:
   instance:

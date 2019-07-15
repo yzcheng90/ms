@@ -1,6 +1,7 @@
 package com.example.getway.config;
 
-import com.example.getway.entity.RateLimiterLevel;
+import com.example.common.core.entity.RateLimiterLevel;
+import com.example.common.gateway.inteface.LimiterLevelResolver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import javax.validation.constraints.Min;
 import java.time.Instant;
 import java.util.*;
@@ -50,7 +50,7 @@ public class CustomRedisRateLimiter extends AbstractRateLimiter<CustomRedisRateL
     private String burstCapacityHeader = BURST_CAPACITY_HEADER;
 
     @Autowired
-    private RateLimiterLevel rateLimiterLevel;
+    private LimiterLevelResolver limiterLevelResolver;
 
     public CustomRedisRateLimiter(ReactiveRedisTemplate<String, String> redisTemplate,RedisScript<List<Long>> script, Validator validator) {
         super(Config.class , CONFIGURATION_PROPERTY_NAME , validator);
@@ -64,9 +64,12 @@ public class CustomRedisRateLimiter extends AbstractRateLimiter<CustomRedisRateL
         if (!this.initialized.get()) {
             throw new IllegalStateException("RedisRateLimiter is not initialized");
         }
-        if (ObjectUtils.isEmpty(rateLimiterLevel) ){
+
+        if (ObjectUtils.isEmpty(limiterLevelResolver) ){
             throw new IllegalArgumentException("No Configuration found for route " + routeId);
         }
+
+        RateLimiterLevel rateLimiterLevel = limiterLevelResolver.get();
 
         // How many requests per second do you want a user to be allowed to do?
         int replenishRate = rateLimiterLevel.getLevels().get(id)[0];
@@ -75,8 +78,8 @@ public class CustomRedisRateLimiter extends AbstractRateLimiter<CustomRedisRateL
 
         try {
             List<String> keys = getKeys(id);
-
-            List<String> scriptArgs = Arrays.asList(replenishRate + "", burstCapacity + "",Instant.now().getEpochSecond() + "", "1");
+            long limitTime = getTime(rateLimiterLevel.getLevels().get(id)[2]);
+            List<String> scriptArgs = Arrays.asList(replenishRate + "", burstCapacity + "",limitTime + "", "1");
             Flux<List<Long>> flux = this.redisTemplate.execute(this.script, keys, scriptArgs);
 
             return flux.onErrorResume(throwable -> Flux.just(Arrays.asList(1L, -1L)))
@@ -114,6 +117,29 @@ public class CustomRedisRateLimiter extends AbstractRateLimiter<CustomRedisRateL
         String tokenKey = prefix + "}.tokens";
         String timestampKey = prefix + "}.timestamp";
         return Arrays.asList(tokenKey, timestampKey);
+    }
+
+    /**
+     * @Date 14:52 2019/7/15
+     * @Param [type] 1:秒，2:分钟，3:小时，4:天
+     * @return long
+     **/
+    public long getTime(int type){
+        long time = Instant.now().getEpochSecond();
+        switch (type){
+            case 1:
+                break;
+            case 2:
+                time = time / (1000 * 60);
+                break;
+            case 3:
+                time = time / (1000 * 60 * 60);
+                break;
+            case 4:
+                time = time / (1000 * 60 * 60 * 24);
+                break;
+        }
+        return time;
     }
 
     @Override

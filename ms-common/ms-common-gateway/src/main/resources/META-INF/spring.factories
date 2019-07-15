@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.example.common.gateway.config.StandardStringSerializationConfig
+  com.example.common.gateway.config.StandardStringSerializationConfig,\
+  com.example.common.gateway.config.RedisLimiterConfig

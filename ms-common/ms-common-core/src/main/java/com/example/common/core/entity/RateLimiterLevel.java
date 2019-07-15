@@ -1,10 +1,11 @@
-package com.example.getway.entity;
+package com.example.common.core.entity;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.List;
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -15,9 +16,6 @@ import java.util.Map;
  * @date 2019/7/515:26
  */
 @Data
-@Configuration
-@ConfigurationProperties(prefix = "rate-limiter-levels")
-public class RateLimiterLevel {
-
+public class RateLimiterLevel implements Serializable {
     private Map<String,Integer[]> levels;
 }
