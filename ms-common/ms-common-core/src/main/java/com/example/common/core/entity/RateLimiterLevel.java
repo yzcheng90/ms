@@ -6,6 +6,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,5 +18,5 @@ import java.util.Map;
  */
 @Data
 public class RateLimiterLevel implements Serializable {
-    private Map<String,Integer[]> levels;
+    private List<RateLimiterVO> levels;
 }

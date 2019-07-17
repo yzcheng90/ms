@@ -4,12 +4,15 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.example.common.core.constants.CommonConstants;
 import com.example.common.core.entity.RateLimiterLevel;
+import com.example.common.core.entity.RateLimiterVO;
 import com.example.common.gateway.inteface.LimiterLevelResolver;
 import com.example.common.gateway.serialization.RedisTokenStoreSerializationStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,9 +50,15 @@ public class RedisLimiterLevelHandler implements LimiterLevelResolver {
         RateLimiterLevel rateLimiterLevel = redisTokenStoreSerializationStrategy.deserialize(value,RateLimiterLevel.class);
         if(ObjectUtil.isNull(value) ||  ObjectUtil.isNull(rateLimiterLevel) || CollUtil.isEmpty(rateLimiterLevel.getLevels())){
             rateLimiterLevel = new RateLimiterLevel();
-            Map<String,Integer[]> map = new HashMap<>();
-            map.put(CommonConstants.DEFAULT_LEVEL,new Integer[]{CommonConstants.DEFAULT_LIMIT_LEVEL,CommonConstants.DEFAULT_LIMIT_LEVEL,CommonConstants.DEFAULT_LIMIT_TYPE});
-            rateLimiterLevel.setLevels(map);
+            List<RateLimiterVO> vos = new ArrayList<>();
+            vos.add(RateLimiterVO
+                    .builder()
+                    .level(CommonConstants.DEFAULT_LEVEL)
+                    .burstCapacity(CommonConstants.DEFAULT_LIMIT_LEVEL)
+                    .replenishRate(CommonConstants.DEFAULT_LIMIT_LEVEL)
+                    .limitType(CommonConstants.DEFAULT_LIMIT_TYPE)
+                    .build());
+            rateLimiterLevel.setLevels(vos);
         }
         return rateLimiterLevel;
     }

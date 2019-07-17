@@ -1,5 +1,6 @@
 package com.example.admin.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.admin.service.SysUserService;
 import com.example.common.core.base.AbstractController;
 import com.example.common.core.constants.CommonConstants;
@@ -51,4 +52,8 @@ public class UserController extends AbstractController {
         return R.builder().data(user).build();
     }
 
+    @RequestMapping(value = "/getList",method = RequestMethod.GET)
+    public R getList(Page page) {
+        return new R(sysUserService.page(page));
+    }
 }

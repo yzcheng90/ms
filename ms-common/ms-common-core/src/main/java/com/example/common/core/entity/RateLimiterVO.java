@@ -1,9 +1,11 @@
-package com.example.admin.entity;
+package com.example.common.core.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 /**
  * @author czx
@@ -14,16 +16,18 @@ import lombok.Data;
  */
 
 @Data
-@TableName("sys_rate_limiter")
-public class SysRateLimiter extends Model<SysRateLimiter> {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class RateLimiterVO implements Serializable {
 
-    @TableId
     private int limitId;
 
     /**
      * 等极
      **/
     private String level;
+
     /**
      * 等极名称（描述）
      **/

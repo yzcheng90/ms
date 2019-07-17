@@ -1,8 +1,10 @@
 package com.example.admin.config;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.example.admin.entity.SysRateLimiter;
 import com.example.admin.service.SysRateLimitService;
 import com.example.common.core.entity.RateLimiterLevel;
+import com.example.common.core.entity.RateLimiterVO;
 import com.example.common.gateway.inteface.LimiterLevelResolver;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +14,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,11 +40,13 @@ public class LimiterInitConfig {
     public void initLimit(){
         List<SysRateLimiter> list = sysRateLimitService.list();
         RateLimiterLevel rateLimiterLevel = new RateLimiterLevel();
-        Map<String,Integer[]> map = new HashMap<>();
+        List<RateLimiterVO> limiterVOS = new ArrayList<>();
         list.forEach(sysRateLimiter -> {
-            map.put(sysRateLimiter.getLevel(),new Integer[]{sysRateLimiter.getReplenishRate(),sysRateLimiter.getBurstCapacity(),sysRateLimiter.getLimitType()});
+            RateLimiterVO vo = new RateLimiterVO();
+            BeanUtil.copyProperties(sysRateLimiter,vo);
+            limiterVOS.add(vo);
         });
-        rateLimiterLevel.setLevels(map);
+        rateLimiterLevel.setLevels(limiterVOS);
         limiterLevelResolver.save(rateLimiterLevel);
         log.info("==============限流配置初始化成功================");
     }

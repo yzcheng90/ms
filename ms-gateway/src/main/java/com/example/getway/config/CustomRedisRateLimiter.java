@@ -1,6 +1,8 @@
 package com.example.getway.config;
 
+import com.example.common.core.constants.CommonConstants;
 import com.example.common.core.entity.RateLimiterLevel;
+import com.example.common.core.entity.RateLimiterVO;
 import com.example.common.gateway.inteface.LimiterLevelResolver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -64,21 +66,35 @@ public class CustomRedisRateLimiter extends AbstractRateLimiter<CustomRedisRateL
         if (!this.initialized.get()) {
             throw new IllegalStateException("RedisRateLimiter is not initialized");
         }
-
         if (ObjectUtils.isEmpty(limiterLevelResolver) ){
             throw new IllegalArgumentException("No Configuration found for route " + routeId);
         }
-
         RateLimiterLevel rateLimiterLevel = limiterLevelResolver.get();
-
         // How many requests per second do you want a user to be allowed to do?
-        int replenishRate = rateLimiterLevel.getLevels().get(id)[0];
+        int replenishRate = rateLimiterLevel
+                .getLevels()
+                .stream()
+                .filter(rateLimiterVO -> rateLimiterVO.getLevel().equals(id))
+                .findFirst()
+                .map(RateLimiterVO::getReplenishRate)
+                .orElse(CommonConstants.DEFAULT_LIMIT_LEVEL);
         // How much bursting do you want to allow?
-        int burstCapacity = rateLimiterLevel.getLevels().get(id)[1];
-
+        int burstCapacity = rateLimiterLevel
+                .getLevels()
+                .stream()
+                .filter(rateLimiterVO -> rateLimiterVO.getLevel().equals(id))
+                .findFirst()
+                .map(RateLimiterVO::getBurstCapacity)
+                .orElse(CommonConstants.DEFAULT_LIMIT_LEVEL);
         try {
             List<String> keys = getKeys(id);
-            long limitTime = getTime(rateLimiterLevel.getLevels().get(id)[2]);
+            long limitTime = getTime(rateLimiterLevel
+                    .getLevels()
+                    .stream()
+                    .filter(rateLimiterVO -> rateLimiterVO.getLevel().equals(id))
+                    .findFirst()
+                    .map(RateLimiterVO::getLimitType)
+                    .orElse(CommonConstants.DEFAULT_LIMIT_TYPE));
             List<String> scriptArgs = Arrays.asList(replenishRate + "", burstCapacity + "",limitTime + "", "1");
             Flux<List<Long>> flux = this.redisTemplate.execute(this.script, keys, scriptArgs);
 

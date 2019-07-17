@@ -1,10 +1,13 @@
 package com.example.admin.controller;
 
+import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.admin.entity.SysRateLimiter;
 import com.example.admin.service.SysRateLimitService;
 import com.example.common.core.base.AbstractController;
 import com.example.common.core.entity.R;
 import com.example.common.core.entity.RateLimiterLevel;
+import com.example.common.core.entity.RateLimiterVO;
 import com.example.common.gateway.inteface.LimiterLevelResolver;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author czx
@@ -46,15 +47,22 @@ public class RateLimiterController extends AbstractController {
         return R.builder().build();
     }
 
+    @RequestMapping(value = "/getList",method = RequestMethod.GET)
+    public R getList(Page page) {
+        return new R(sysRateLimitService.page(page));
+    }
+
     @RequestMapping("/sync")
     public R syncRedisRateLimit(){
         List<SysRateLimiter> list = sysRateLimitService.list();
         RateLimiterLevel rateLimiterLevel = new RateLimiterLevel();
-        Map<String,Integer[]> map = new HashMap<>();
+        List<RateLimiterVO> limiterVOS = new ArrayList<>();
         list.forEach(sysRateLimiter -> {
-            map.put(sysRateLimiter.getLevel(),new Integer[]{sysRateLimiter.getReplenishRate(),sysRateLimiter.getBurstCapacity(),sysRateLimiter.getLimitType()});
+            RateLimiterVO vo = new RateLimiterVO();
+            BeanUtil.copyProperties(sysRateLimiter,vo);
+            limiterVOS.add(vo);
         });
-        rateLimiterLevel.setLevels(map);
+        rateLimiterLevel.setLevels(limiterVOS);
         limiterLevelResolver.save(rateLimiterLevel);
         return R.builder().build();
     }
