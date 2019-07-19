@@ -34,7 +34,7 @@ public class UserDetailsUtils {
 
         UserInfo info = UserInfo.builder().user(result).build();
         Set<String> roles = new HashSet<>();
-        Collection<? extends GrantedAuthority> authorities  = AuthorityUtils.createAuthorityList(roles.toArray(new String[0]));
+        Collection<? extends GrantedAuthority> authorities  = AuthorityUtils.createAuthorityList(roles.toArray(new String[]{"USER_ROLE"}));
         SysUser user = info.getUser();
         boolean enabled = StrUtil.equals(user.getLockFlag(), CommonConstants.STATUS_NORMAL);
 

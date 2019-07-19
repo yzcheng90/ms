@@ -1,4 +1,4 @@
-package com.example.auth.mobile;
+package com.example.auth.social;
 
 import com.example.auth.compoent.UserAuthenticationChecks;
 import com.example.auth.service.AuthenticationSocialUserService;
@@ -18,7 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsChecker;
  * 验证码登录、第三方应用登录
  */
 @Slf4j
-public class MobileAuthenticationProvider implements AuthenticationProvider {
+public class SocialAuthenticationProvider implements AuthenticationProvider {
 	private MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 	private UserDetailsChecker detailsChecker = new UserAuthenticationChecks();
 
@@ -28,9 +28,9 @@ public class MobileAuthenticationProvider implements AuthenticationProvider {
 	@Override
 	@SneakyThrows
 	public Authentication authenticate(Authentication authentication) {
-		MobileAuthenticationToken mobileAuthenticationToken = (MobileAuthenticationToken) authentication;
+		SocialAuthenticationToken socialAuthenticationToken = (SocialAuthenticationToken) authentication;
 
-		String principal = mobileAuthenticationToken.getPrincipal().toString();
+		String principal = socialAuthenticationToken.getPrincipal().toString();
 		UserDetails userDetails = authenticationSocialUserService.getSocialUserInfo(principal);
 		if (userDetails == null) {
 			log.debug("Authentication failed: no credentials provided");
@@ -42,13 +42,13 @@ public class MobileAuthenticationProvider implements AuthenticationProvider {
 
 		detailsChecker.check(userDetails);
 
-		MobileAuthenticationToken authenticationToken = new MobileAuthenticationToken(userDetails, userDetails.getAuthorities());
-		authenticationToken.setDetails(mobileAuthenticationToken.getDetails());
+		SocialAuthenticationToken authenticationToken = new SocialAuthenticationToken(userDetails, userDetails.getAuthorities());
+		authenticationToken.setDetails(socialAuthenticationToken.getDetails());
 		return authenticationToken;
 	}
 
 	@Override
 	public boolean supports(Class<?> authentication) {
-		return MobileAuthenticationToken.class.isAssignableFrom(authentication);
+		return SocialAuthenticationToken.class.isAssignableFrom(authentication);
 	}
 }

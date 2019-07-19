@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author czx
@@ -15,6 +16,7 @@ import lombok.Data;
 
 @Data
 @TableName("sys_rate_limiter")
+@EqualsAndHashCode(callSuper = false)
 public class SysRateLimiter extends Model<SysRateLimiter> {
 
     @TableId

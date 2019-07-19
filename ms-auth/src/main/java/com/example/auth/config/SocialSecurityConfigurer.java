@@ -1,7 +1,7 @@
 package com.example.auth.config;
 
-import com.example.auth.mobile.MobileAuthenticationFilter;
-import com.example.auth.mobile.MobileAuthenticationProvider;
+import com.example.auth.social.SocialAuthenticationFilter;
+import com.example.auth.social.SocialAuthenticationProvider;
 import com.example.auth.service.AuthenticationSocialUserService;
 import com.example.common.resource.security.ResourceAuthExceptionEntryPoint;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,13 +25,13 @@ import org.springframework.stereotype.Component;
  *
  * 2、配置 认证提供者 的 provider oauth2 默认的 DaoAuthenticationProvider 继承于 AuthenticationProvider
  *    自定义认证模式 也要配置provider 和过滤器类似 自己写一个类 继承于 AuthenticationProvider 重写 authenticate 实现
- * @Description //TODO 手机号码登录验证配置$
+ * @Description //TODO 第三方登录验证配置$
  * @Date 20:13
  * @Author yzcheng90@qq.com
  **/
 
 @Component
-public class MobileSecurityConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
+public class SocialSecurityConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -41,19 +41,19 @@ public class MobileSecurityConfigurer extends SecurityConfigurerAdapter<DefaultS
 
     @Getter
     @Setter
-    private AuthenticationSuccessHandler mobileLoginSuccessHandler;
+    private AuthenticationSuccessHandler socialLoginSuccessHandler;
 
     @Override
     public void configure(HttpSecurity http) {
-        MobileAuthenticationFilter mobileAuthenticationFilter = new MobileAuthenticationFilter();
-        mobileAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
-        mobileAuthenticationFilter.setAuthenticationSuccessHandler(mobileLoginSuccessHandler);
-        mobileAuthenticationFilter.setAuthenticationEntryPoint(new ResourceAuthExceptionEntryPoint(objectMapper));
+        SocialAuthenticationFilter socialAuthenticationFilter = new SocialAuthenticationFilter();
+        socialAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
+        socialAuthenticationFilter.setAuthenticationSuccessHandler(socialLoginSuccessHandler);
+        socialAuthenticationFilter.setAuthenticationEntryPoint(new ResourceAuthExceptionEntryPoint(objectMapper));
 
-        MobileAuthenticationProvider mobileAuthenticationProvider = new MobileAuthenticationProvider();
-        mobileAuthenticationProvider.setAuthenticationSocialUserService(authenticationSocialUserService);
+        SocialAuthenticationProvider socialAuthenticationProvider = new SocialAuthenticationProvider();
+        socialAuthenticationProvider.setAuthenticationSocialUserService(authenticationSocialUserService);
         http.
-            authenticationProvider(mobileAuthenticationProvider)
-            .addFilterAfter(mobileAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+            authenticationProvider(socialAuthenticationProvider)
+            .addFilterAfter(socialAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

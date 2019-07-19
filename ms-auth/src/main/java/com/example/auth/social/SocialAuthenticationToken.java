@@ -1,4 +1,4 @@
-package com.example.auth.mobile;
+package com.example.auth.social;
 
 import lombok.SneakyThrows;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -10,19 +10,19 @@ import java.util.Collection;
 /**
  * 手机号登录令牌
  */
-public class MobileAuthenticationToken extends AbstractAuthenticationToken {
+public class SocialAuthenticationToken extends AbstractAuthenticationToken {
 
 	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
 	private final Object principal;
 
-	public MobileAuthenticationToken(String mobile) {
+	public SocialAuthenticationToken(String mobile) {
 		super(null);
 		this.principal = mobile;
 		setAuthenticated(false);
 	}
 
-	public MobileAuthenticationToken(Object principal,Collection<? extends GrantedAuthority> authorities) {
+	public SocialAuthenticationToken(Object principal, Collection<? extends GrantedAuthority> authorities) {
 		super(authorities);
 		this.principal = principal;
 		super.setAuthenticated(true);

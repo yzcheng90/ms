@@ -1,4 +1,4 @@
-package com.example.auth.social;
+package com.example.auth.handler;
 
 
 import com.example.common.resource.entity.UserInfo;

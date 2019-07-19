@@ -31,7 +31,7 @@ import java.nio.charset.StandardCharsets;
  */
 @Slf4j
 @Builder
-public class MobileLoginSuccessHandler implements AuthenticationSuccessHandler {
+public class SocialLoginSuccessHandler implements AuthenticationSuccessHandler {
 	private static final String BASIC_ = "Basic ";
 	private ObjectMapper objectMapper;
 	private PasswordEncoder passwordEncoder;

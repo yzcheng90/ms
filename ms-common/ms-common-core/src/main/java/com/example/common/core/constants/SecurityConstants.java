@@ -6,9 +6,9 @@ package com.example.common.core.constants;
 public interface SecurityConstants {
 
     /**
-     * 手机号获取token URL
+     * 第三文获取token URL
      */
-    String MOBILE_TOKEN_URL = "/mobile/token/*";
+    String SOCIAL_TOKEN_URL = "/social/token/*";
 
     /**
      * {bcrypt} 加密的特征码

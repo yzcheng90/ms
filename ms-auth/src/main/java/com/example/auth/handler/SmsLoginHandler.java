@@ -1,4 +1,4 @@
-package com.example.auth.social;
+package com.example.auth.handler;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.auth.service.AuthenticationUserService;
@@ -6,6 +6,7 @@ import com.example.common.resource.entity.SysUser;
 import com.example.common.resource.entity.UserInfo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.stereotype.Component;
 
 /**
@@ -44,7 +45,7 @@ public class SmsLoginHandler extends AbstractLoginHandler {
 
 		if (user == null) {
 			log.info("手机号未注册:{}", identify);
-			return null;
+			throw new OAuth2Exception("手机号未注册:"+identify);
 		}
 		return UserInfo.builder().user(user).build();
 	}

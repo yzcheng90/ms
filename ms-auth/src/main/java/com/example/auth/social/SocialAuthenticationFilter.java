@@ -1,4 +1,4 @@
-package com.example.auth.mobile;
+package com.example.auth.social;
 
 import com.example.common.core.constants.SecurityConstants;
 import lombok.Getter;
@@ -20,13 +20,13 @@ import javax.servlet.http.HttpServletResponse;
  * 除了oauth2 自带的4种认证模式，想要实现其他的认证模式，就继承 AbstractAuthenticationProcessingFilter 重写 attemptAuthentication 方法
  * oauth2 自带的4种模式是 ClientCredentialsTokenEndpointFilter 类处理，该类也是继承 AbstractAuthenticationProcessingFilter 重写attemptAuthentication方法
  * 继承 AbstractAuthenticationProcessingFilter 在构造的时候要传入 其他认证模式的 url
- * 如：本例子手机号登录验证
+ * 如：本例子第三方登录验证
  */
-public class MobileAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
-	private static final String SPRING_SECURITY_FORM_MOBILE_KEY = "mobile";
+public class SocialAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+	private static final String SPRING_SECURITY_FORM_SOCIAL_KEY = "social";
 	@Getter
 	@Setter
-	private String mobileParameter = SPRING_SECURITY_FORM_MOBILE_KEY;
+	private String socialParameter = SPRING_SECURITY_FORM_SOCIAL_KEY;
 	@Getter
 	@Setter
 	private boolean postOnly = true;
@@ -35,8 +35,8 @@ public class MobileAuthenticationFilter extends AbstractAuthenticationProcessing
 	private AuthenticationEntryPoint authenticationEntryPoint;
 
 
-	public MobileAuthenticationFilter() {
-		super(new AntPathRequestMatcher(SecurityConstants.MOBILE_TOKEN_URL, "POST"));
+	public SocialAuthenticationFilter() {
+		super(new AntPathRequestMatcher(SecurityConstants.SOCIAL_TOKEN_URL, "POST"));
 	}
 
 	@Override
@@ -49,22 +49,18 @@ public class MobileAuthenticationFilter extends AbstractAuthenticationProcessing
 			throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
 		}
 
-		String mobile = request.getParameter(mobileParameter);
-		if (mobile == null) {
-			mobile = "";
+		String social = request.getParameter(socialParameter);
+		if (social == null) {
+			social = "";
 		}
-		mobile = mobile.trim();
-
-		/**
-		 * 用手机号码生成token
-		 */
-		MobileAuthenticationToken mobileAuthenticationToken = new MobileAuthenticationToken(mobile);
-		mobileAuthenticationToken.setDetails(authenticationDetailsSource.buildDetails(request));
+		social = social.trim();
+		SocialAuthenticationToken socialAuthenticationToken = new SocialAuthenticationToken(social);
+		socialAuthenticationToken.setDetails(authenticationDetailsSource.buildDetails(request));
 
 
 		Authentication authResult = null;
 		try {
-			authResult = this.getAuthenticationManager().authenticate(mobileAuthenticationToken);
+			authResult = this.getAuthenticationManager().authenticate(socialAuthenticationToken);
 
 			logger.debug("Authentication success: " + authResult);
 			SecurityContextHolder.getContext().setAuthentication(authResult);

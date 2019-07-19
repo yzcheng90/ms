@@ -3,7 +3,7 @@ package com.example.auth.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.auth.mapper.AuthenticationSocialUserMapper;
 import com.example.auth.service.AuthenticationSocialUserService;
-import com.example.auth.social.LoginHandler;
+import com.example.auth.handler.LoginHandler;
 import com.example.auth.utils.UserDetailsUtils;
 import com.example.common.resource.entity.SysSocialDetails;
 import lombok.AllArgsConstructor;

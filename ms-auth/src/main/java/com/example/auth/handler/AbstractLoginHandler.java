@@ -1,4 +1,4 @@
-package com.example.auth.social;
+package com.example.auth.handler;
 
 import com.example.common.resource.entity.UserInfo;
 
@@ -21,6 +21,7 @@ public abstract class AbstractLoginHandler implements LoginHandler{
 
     /**
      * 登录
+     *  loginStr 如果手机号码登录，那就是手机号码，如果是第三方如QQ 微信，那就是openID 之类
      * @param loginStr 登录参数
      * @return
      */
