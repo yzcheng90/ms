@@ -8,7 +8,7 @@ import com.example.common.core.constants.SecurityConstants;
 import com.example.common.core.entity.R;
 import com.example.common.core.entity.TokenEntity;
 import com.example.common.resource.entity.CustomUserDetailsUser;
-import com.example.common.resource.entity.SysUser;
+import com.example.common.user.entity.SysUser;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;

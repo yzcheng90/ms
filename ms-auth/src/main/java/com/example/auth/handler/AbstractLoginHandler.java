@@ -1,6 +1,6 @@
 package com.example.auth.handler;
 
-import com.example.common.resource.entity.UserInfo;
+import com.example.auth.entity.UserInfo;
 
 /**
  * @Description //TODO 默认抽象实现$

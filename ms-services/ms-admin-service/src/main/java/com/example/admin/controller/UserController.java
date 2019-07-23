@@ -1,11 +1,12 @@
 package com.example.admin.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.admin.remote.RemoteSmsService;
 import com.example.admin.service.SysUserService;
 import com.example.common.core.base.AbstractController;
 import com.example.common.core.constants.CommonConstants;
 import com.example.common.core.entity.R;
-import com.example.common.resource.entity.SysUser;
+import com.example.common.user.entity.SysUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,8 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
 
 
 @Slf4j
@@ -29,6 +28,9 @@ public class UserController extends AbstractController {
 
     @Autowired
     private SysUserService sysUserService;
+
+    @Autowired
+    private RemoteSmsService remoteSmsService;
 
     private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
     private int count = 0;
@@ -55,5 +57,10 @@ public class UserController extends AbstractController {
     @RequestMapping(value = "/getList", method = RequestMethod.GET)
     public R getList(Page page) {
         return new R(sysUserService.page(page));
+    }
+
+    @RequestMapping(value = "/sms",method = RequestMethod.GET)
+    public R getSms(){
+        return remoteSmsService.hello();
     }
 }

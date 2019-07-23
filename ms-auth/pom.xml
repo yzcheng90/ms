@@ -58,7 +58,11 @@
             <artifactId>ms-common-resource</artifactId>
             <version>1.0.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>ms-common-user</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>ms-common-cache</artifactId>

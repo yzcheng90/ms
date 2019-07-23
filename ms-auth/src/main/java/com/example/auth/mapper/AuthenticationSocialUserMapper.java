@@ -1,8 +1,8 @@
 package com.example.auth.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.common.resource.entity.SysSocialDetails;
-import com.example.common.resource.entity.UserInfo;
+import com.example.auth.entity.UserInfo;
+import com.example.common.user.entity.SysSocialDetails;
 
 public interface AuthenticationSocialUserMapper extends BaseMapper<SysSocialDetails> {
 

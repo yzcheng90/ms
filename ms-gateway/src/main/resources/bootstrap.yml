@@ -33,6 +33,20 @@ spring:
             args:
               rate-limiter: "#{@customRedisRateLimiter}"
               key-resolver: "#{@principalNameKeyResolver}"
+      - id: ms-sms-service          #网关路由到服务admin
+        uri: lb://ms-sms-service
+        predicates:
+          - Path=/sms/**
+        filters:
+          - StripPrefix=1
+          - name: Hystrix
+            args:
+              name: fallbackcmd
+              fallbackUri: forward:/fallback
+          - name: RequestRateLimiter
+            args:
+              rate-limiter: "#{@customRedisRateLimiter}"
+              key-resolver: "#{@principalNameKeyResolver}"
       - id: ms-auth          #网关路由到服务auth
         uri: lb://ms-auth
         predicates:

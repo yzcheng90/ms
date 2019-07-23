@@ -5,7 +5,7 @@ import com.example.auth.mapper.AuthenticationSocialUserMapper;
 import com.example.auth.service.AuthenticationSocialUserService;
 import com.example.auth.handler.LoginHandler;
 import com.example.auth.utils.UserDetailsUtils;
-import com.example.common.resource.entity.SysSocialDetails;
+import com.example.common.user.entity.SysSocialDetails;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;

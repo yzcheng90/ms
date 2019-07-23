@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class RemoteSmsFallBack implements RemoteSmsService {
 
     @Override
-    public R hello(String secretKey) {
+    public R hello() {
         return R.error("熔错返回");
     }
 }

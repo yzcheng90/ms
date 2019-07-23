@@ -23,6 +23,14 @@ public interface CommonConstants {
      * 认证头
      */
     String AUTHORIZATION = "Authorization";
+    /**
+     * token 头
+     */
+    String BEARER = "Bearer ";
+    /**
+     * feign 的token key
+     */
+    String ACCESS_TOKEN_VALUE = "OAuth2AuthenticationDetails.ACCESS_TOKEN_VALUE";
 
     /**
      * redis 认证用户信息

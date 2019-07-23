@@ -4,7 +4,7 @@ import com.example.auth.service.AuthenticationUserService;
 import com.example.auth.service.CustomUserDetailsService;
 import com.example.auth.utils.UserDetailsUtils;
 import com.example.common.core.constants.SecurityConstants;
-import com.example.common.resource.entity.SysUser;
+import com.example.common.user.entity.SysUser;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;

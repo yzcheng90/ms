@@ -12,6 +12,11 @@
     <artifactId>ms-common-feign</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>ms-common-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <!--feign 依赖-->
         <dependency>
             <groupId>io.github.openfeign</groupId>

@@ -3,7 +3,7 @@ package com.example.auth.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.auth.mapper.AuthenticationUserMapper;
 import com.example.auth.service.AuthenticationUserService;
-import com.example.common.resource.entity.SysUser;
+import com.example.common.user.entity.SysUser;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

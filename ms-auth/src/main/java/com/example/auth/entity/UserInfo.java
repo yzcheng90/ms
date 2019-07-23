@@ -1,5 +1,6 @@
-package com.example.common.resource.entity;
+package com.example.auth.entity;
 
+import com.example.common.user.entity.SysUser;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;

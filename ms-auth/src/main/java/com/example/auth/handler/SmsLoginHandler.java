@@ -2,8 +2,8 @@ package com.example.auth.handler;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.auth.service.AuthenticationUserService;
-import com.example.common.resource.entity.SysUser;
-import com.example.common.resource.entity.UserInfo;
+import com.example.auth.entity.UserInfo;
+import com.example.common.user.entity.SysUser;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;

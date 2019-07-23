@@ -1,7 +1,7 @@
 package com.example.auth.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.common.resource.entity.SysSocialDetails;
+import com.example.common.user.entity.SysSocialDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**

@@ -3,9 +3,9 @@ package com.example.auth.utils;
 import cn.hutool.core.util.StrUtil;
 import com.example.common.core.constants.CommonConstants;
 import com.example.common.core.constants.SecurityConstants;
-import com.example.common.resource.entity.SysUser;
-import com.example.common.resource.entity.UserInfo;
+import com.example.auth.entity.UserInfo;
 import com.example.common.resource.entity.CustomUserDetailsUser;
+import com.example.common.user.entity.SysUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,7 +34,7 @@ public class UserDetailsUtils {
 
         UserInfo info = UserInfo.builder().user(result).build();
         Set<String> roles = new HashSet<>();
-        Collection<? extends GrantedAuthority> authorities  = AuthorityUtils.createAuthorityList(roles.toArray(new String[]{"USER_ROLE"}));
+        Collection<? extends GrantedAuthority> authorities  = AuthorityUtils.createAuthorityList(roles.toArray(new String[]{}));
         SysUser user = info.getUser();
         boolean enabled = StrUtil.equals(user.getLockFlag(), CommonConstants.STATUS_NORMAL);
 

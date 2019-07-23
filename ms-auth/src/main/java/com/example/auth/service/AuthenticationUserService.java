@@ -1,7 +1,7 @@
 package com.example.auth.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.common.resource.entity.SysUser;
+import com.example.common.user.entity.SysUser;
 
 /**
  * @Description //TODO 用户service$
