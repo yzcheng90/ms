@@ -9,15 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
+    <artifactId>ms-services</artifactId>
+
     <modules>
-        <module>ms-common-core</module>
-        <module>ms-common-resource</module>
-        <module>ms-common-gateway</module>
-        <module>ms-common-cache</module>
-        <module>ms-common-feign</module>
+        <module>ms-admin-service</module>
+        <module>ms-sms-service</module>
     </modules>
-    <artifactId>ms-common</artifactId>
-    <description>公共模块</description>
 
     <dependencies>
         <!--hutool-->
@@ -26,6 +23,10 @@
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>ms-common-feign</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
-
 </project>

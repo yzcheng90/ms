@@ -33,26 +33,26 @@ public class UserController extends AbstractController {
     private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
     private int count = 0;
 
-    @RequestMapping(value = "/getUser/{id}",method = RequestMethod.GET)
-    public SysUser getUser(@PathVariable("id") Integer id){
-        count ++;
-        log.info("===================次数：{},port：{}=================",count,port);
+    @RequestMapping(value = "/getUser/{id}", method = RequestMethod.GET)
+    public SysUser getUser(@PathVariable("id") Integer id) {
+        count++;
+        log.info("===================次数：{},port：{}=================", count, port);
         return sysUserService.getUserById(id);
     }
 
-    @RequestMapping(value = "/createUser",method = RequestMethod.GET)
-    public R createUser(){
+    @RequestMapping(value = "/createUser", method = RequestMethod.GET)
+    public R createUser() {
         SysUser user = new SysUser();
-        user.setUsername("test"+ count);
+        user.setUsername("test" + count);
         user.setPassword(ENCODER.encode("123456"));
         user.setDelFlag(CommonConstants.STATUS_NORMAL);
         user.setLimitLevel(Integer.valueOf(CommonConstants.DEFAULT_LEVEL));
         sysUserService.save(user);
-        count ++;
+        count++;
         return R.builder().data(user).build();
     }
 
-    @RequestMapping(value = "/getList",method = RequestMethod.GET)
+    @RequestMapping(value = "/getList", method = RequestMethod.GET)
     public R getList(Page page) {
         return new R(sysUserService.page(page));
     }

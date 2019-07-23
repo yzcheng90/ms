@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.example</groupId>
-        <artifactId>ms</artifactId>
+        <artifactId>ms-services</artifactId>
         <version>1.0.0</version>
     </parent>
-    <groupId>com.example</groupId>
-    <artifactId>ms-admin</artifactId>
+    <groupId>com.example.service</groupId>
+    <artifactId>ms-admin-service</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
-    <name>ms-admin</name>
+    <name>ms-admin-service</name>
     <description>admin服务</description>
 
     <dependencies>

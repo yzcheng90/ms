@@ -8,15 +8,17 @@
         <outputRelativeToContentRoot value="true" />
         <module name="cloudx-admin" />
         <module name="eureka1" />
-        <module name="ms-admin" />
+        <module name="ms-admin-service" />
         <module name="ms-auth" />
         <module name="ms-common-cache" />
         <module name="ms-common-core" />
+        <module name="ms-common-feign" />
         <module name="ms-common-gateway" />
         <module name="ms-common-resource" />
         <module name="ms-config" />
         <module name="ms-eureka" />
         <module name="ms-gateway" />
+        <module name="ms-sms-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -24,15 +26,19 @@
       <module name="eureka1" target="1.8" />
       <module name="ms" target="1.8" />
       <module name="ms-admin" target="1.8" />
+      <module name="ms-admin-service" target="1.8" />
       <module name="ms-auth" target="1.8" />
       <module name="ms-common" target="1.8" />
       <module name="ms-common-cache" target="1.8" />
       <module name="ms-common-core" target="1.8" />
+      <module name="ms-common-feign" target="1.8" />
       <module name="ms-common-gateway" target="1.8" />
       <module name="ms-common-resource" target="1.8" />
       <module name="ms-config" target="1.8" />
       <module name="ms-eureka" target="1.8" />
       <module name="ms-gateway" target="1.8" />
+      <module name="ms-services" target="1.8" />
+      <module name="ms-sms-service" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

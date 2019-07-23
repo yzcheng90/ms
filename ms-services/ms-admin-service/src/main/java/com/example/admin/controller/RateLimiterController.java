@@ -32,14 +32,14 @@ public class RateLimiterController extends AbstractController {
     private final SysRateLimitService sysRateLimitService;
     private final LimiterLevelResolver limiterLevelResolver;
 
-    @RequestMapping(value = "/save",method = RequestMethod.GET)
-    public R saveRateLimit(){
+    @RequestMapping(value = "/save", method = RequestMethod.GET)
+    public R saveRateLimit() {
         List<SysRateLimiter> limiters = new ArrayList<>();
-        for (int i=0;i<5;i++){
+        for (int i = 0; i < 5; i++) {
             SysRateLimiter limiter = new SysRateLimiter();
             limiter.setLevel(String.valueOf((i + 1)));
-            limiter.setBurstCapacity(( i + 1 ) * 10);
-            limiter.setReplenishRate(( i + 1 ) * 10);
+            limiter.setBurstCapacity((i + 1) * 10);
+            limiter.setReplenishRate((i + 1) * 10);
             limiter.setLimitType(1);
             limiters.add(limiter);
         }
@@ -47,19 +47,19 @@ public class RateLimiterController extends AbstractController {
         return R.builder().build();
     }
 
-    @RequestMapping(value = "/getList",method = RequestMethod.GET)
+    @RequestMapping(value = "/getList", method = RequestMethod.GET)
     public R getList(Page page) {
         return new R(sysRateLimitService.page(page));
     }
 
     @RequestMapping("/sync")
-    public R syncRedisRateLimit(){
+    public R syncRedisRateLimit() {
         List<SysRateLimiter> list = sysRateLimitService.list();
         RateLimiterLevel rateLimiterLevel = new RateLimiterLevel();
         List<RateLimiterVO> limiterVOS = new ArrayList<>();
         list.forEach(sysRateLimiter -> {
             RateLimiterVO vo = new RateLimiterVO();
-            BeanUtil.copyProperties(sysRateLimiter,vo);
+            BeanUtil.copyProperties(sysRateLimiter, vo);
             limiterVOS.add(vo);
         });
         rateLimiterLevel.setLevels(limiterVOS);

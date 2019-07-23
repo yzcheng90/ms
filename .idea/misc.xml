@@ -9,6 +9,8 @@
         <option value="$PROJECT_DIR$/getway/pom.xml" />
         <option value="$PROJECT_DIR$/config/pom.xml" />
         <option value="$PROJECT_DIR$/auth/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-services/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-services/ms-sms-service/pom.xml" />
       </list>
     </option>
   </component>

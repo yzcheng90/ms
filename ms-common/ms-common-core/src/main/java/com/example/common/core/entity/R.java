@@ -50,4 +50,37 @@ public class R<T> implements Serializable {
         this.message = e.getMessage();
         this.code = HttpStatus.HTTP_INTERNAL_ERROR;
     }
+
+    public static R ok(){
+        return R
+                .builder()
+                .code(HttpStatus.HTTP_OK)
+                .message("success")
+                .build();
+    }
+
+    public static R error(){
+        return R
+                .builder()
+                .code(HttpStatus.HTTP_INTERNAL_ERROR)
+                .message("error")
+                .build();
+    }
+
+    public static R error(String message){
+        return R
+                .builder()
+                .code(HttpStatus.HTTP_INTERNAL_ERROR)
+                .message(message)
+                .build();
+    }
+
+    public static R ok(Object data){
+        return R
+                .builder()
+                .code(HttpStatus.HTTP_OK)
+                .data(data)
+                .message("success")
+                .build();
+    }
 }

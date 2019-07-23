@@ -31,11 +31,11 @@
 
     <modules>
         <module>ms-eureka</module>
-        <module>ms-admin</module>
         <module>ms-gateway</module>
         <module>ms-config</module>
         <module>ms-auth</module>
         <module>ms-common</module>
+        <module>ms-services</module>
     </modules>
 
     <dependencies>

@@ -35,13 +35,13 @@ public class LimiterInitConfig {
     @Async
     @Order
     @EventListener({WebServerInitializedEvent.class})
-    public void initLimit(){
+    public void initLimit() {
         List<SysRateLimiter> list = sysRateLimitService.list();
         RateLimiterLevel rateLimiterLevel = new RateLimiterLevel();
         List<RateLimiterVO> limiterVOS = new ArrayList<>();
         list.forEach(sysRateLimiter -> {
             RateLimiterVO vo = new RateLimiterVO();
-            BeanUtil.copyProperties(sysRateLimiter,vo);
+            BeanUtil.copyProperties(sysRateLimiter, vo);
             limiterVOS.add(vo);
         });
         rateLimiterLevel.setLevels(limiterVOS);

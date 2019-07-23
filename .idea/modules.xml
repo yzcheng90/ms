@@ -3,16 +3,19 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ms.iml" filepath="$PROJECT_DIR$/ms.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ms-admin/ms-admin.iml" filepath="$PROJECT_DIR$/ms-admin/ms-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-services/ms-admin-service/ms-admin-service.iml" filepath="$PROJECT_DIR$/ms-services/ms-admin-service/ms-admin-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-auth/ms-auth.iml" filepath="$PROJECT_DIR$/ms-auth/ms-auth.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-common/ms-common.iml" filepath="$PROJECT_DIR$/ms-common/ms-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-common/ms-common-cache/ms-common-cache.iml" filepath="$PROJECT_DIR$/ms-common/ms-common-cache/ms-common-cache.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-common/ms-common-core/ms-common-core.iml" filepath="$PROJECT_DIR$/ms-common/ms-common-core/ms-common-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-common/ms-common-feign/ms-common-feign.iml" filepath="$PROJECT_DIR$/ms-common/ms-common-feign/ms-common-feign.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-common/ms-common-gateway/ms-common-gateway.iml" filepath="$PROJECT_DIR$/ms-common/ms-common-gateway/ms-common-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-common/ms-common-resource/ms-common-resource.iml" filepath="$PROJECT_DIR$/ms-common/ms-common-resource/ms-common-resource.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-config/ms-config.iml" filepath="$PROJECT_DIR$/ms-config/ms-config.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-eureka/ms-eureka.iml" filepath="$PROJECT_DIR$/ms-eureka/ms-eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-gateway/ms-gateway.iml" filepath="$PROJECT_DIR$/ms-gateway/ms-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-services/ms-services.iml" filepath="$PROJECT_DIR$/ms-services/ms-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-services/ms-sms-service/ms-sms-service.iml" filepath="$PROJECT_DIR$/ms-services/ms-sms-service/ms-sms-service.iml" />
     </modules>
   </component>
 </project>

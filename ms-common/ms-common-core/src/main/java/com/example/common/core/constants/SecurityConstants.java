@@ -6,6 +6,11 @@ package com.example.common.core.constants;
 public interface SecurityConstants {
 
     /**
+     * 接口标识
+     */
+    String SECRET_KEY = "secretKey";
+
+    /**
      * 第三文获取token URL
      */
     String SOCIAL_TOKEN_URL = "/social/token/*";
