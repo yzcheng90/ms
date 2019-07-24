@@ -30,7 +30,7 @@ public class RequestGlobalFilter implements GlobalFilter, Ordered {
     // 过期时间
     public final static long expiration = 1000 * 60 * 5;
 
-    // 过期时间
+    // 过期前1分钟
     public final static long lastTime = 1000 * 60;
 
     @Override
@@ -49,9 +49,7 @@ public class RequestGlobalFilter implements GlobalFilter, Ordered {
                 .headers(httpHeaders -> httpHeaders.remove(SecurityConstants.SECRET_KEY))
                 .build();
         ServerHttpRequest newRequest = request.mutate().header(SecurityConstants.SECRET_KEY,secretKey).build();
-        return chain.filter(exchange.mutate()
-                .request(newRequest.mutate().build())
-                .build());
+        return chain.filter(exchange.mutate().request(newRequest.mutate().build()).build());
     }
 
     @Override

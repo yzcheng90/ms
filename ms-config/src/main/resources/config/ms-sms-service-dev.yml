@@ -9,7 +9,3 @@ security:
       ignore-urls:
         - /actuator/**
         - /v2/api-docs
-        - /user/info/*
-        - /social/info/*
-        - /social/*
-        - /log/save

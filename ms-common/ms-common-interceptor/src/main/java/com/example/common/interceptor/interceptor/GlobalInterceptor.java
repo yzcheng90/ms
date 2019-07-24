@@ -4,8 +4,13 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.example.common.core.constants.SecurityConstants;
 import com.example.common.core.entity.R;
+import com.example.common.resource.config.AuthIgnoreConfig;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,17 +25,23 @@ import java.io.PrintWriter;
 @Slf4j
 public class GlobalInterceptor implements HandlerInterceptor {
 
+    @Getter
+    @Setter
     private RedisTemplate redisTemplate;
 
-    public GlobalInterceptor(RedisTemplate<String,Object> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
+    @Getter
+    @Setter
+    private AuthIgnoreConfig authIgnoreConfig;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception {
+        long exist =  authIgnoreConfig.getIgnoreUrls().stream().filter(url-> url.trim().equals(request.getRequestURI())).count();
+        if(exist != 0){
+            return true;
+        }
         String secretKey = request.getHeader(SecurityConstants.SECRET_KEY);
         if(StrUtil.isNotBlank(secretKey)){
-            String key = (String) redisTemplate.opsForValue().get(SecurityConstants.SECRET_KEY);
+            String key = (String) this.getRedisTemplate().opsForValue().get(SecurityConstants.SECRET_KEY);
             if(!StrUtil.isBlank(key) && secretKey.equals(key)){
                 return true;
             }

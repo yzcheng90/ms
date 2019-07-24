@@ -1,13 +1,14 @@
 package com.example.common.interceptor.config;
 
 import com.example.common.interceptor.interceptor.GlobalInterceptor;
+import com.example.common.resource.config.AuthIgnoreConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -22,6 +23,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
+    @Autowired
+    private WebApplicationContext applicationContext;
+
     @Bean
     @ConditionalOnMissingBean(RedisTemplate.class)
     public RedisTemplate<String, Object> redisTemplate() {
@@ -33,6 +37,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new GlobalInterceptor(redisTemplate())).addPathPatterns("/**");
+        GlobalInterceptor interceptor = new GlobalInterceptor();
+        interceptor.setRedisTemplate(redisTemplate());
+        interceptor.setAuthIgnoreConfig(applicationContext.getBean(AuthIgnoreConfig.class));
+        registry.addInterceptor(interceptor).addPathPatterns("/**");
     }
 }

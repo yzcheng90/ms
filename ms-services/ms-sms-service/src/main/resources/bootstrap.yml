@@ -4,7 +4,6 @@ server:
 spring:
   application:
     name: @artifactId@
-  # ÅäÖÃÖĞĞÄ
   cloud:
     config:
       fail-fast: true

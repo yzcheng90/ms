@@ -1,5 +1,6 @@
 package com.example.common.resource.security;
 
+import com.example.common.resource.config.AuthIgnoreConfig;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,23 +22,20 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     private final RemoteTokenServices remoteTokenServices;
     private final RestTemplate lbRestTemplate;
     private final ResourceAuthExceptionEntryPoint resourceAuthExceptionEntryPoint;
-
+    private final AuthIgnoreConfig authIgnoreConfig;
     /**
      * @Description //TODO http 请求的一些过滤配置
      **/
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        String[] urls = authIgnoreConfig.getIgnoreUrls().stream().distinct().toArray(String[]::new);
         http
-            .headers()
-            .frameOptions()
-            .disable()
+            .headers().frameOptions().disable()
             .and()
-            .authorizeRequests()
-            .anyRequest()
-            .authenticated()
+            .authorizeRequests().antMatchers(urls).permitAll()
+            .anyRequest().authenticated()
             .and()
-            .csrf()
-            .disable();
+            .csrf().disable();
     }
 
     /**

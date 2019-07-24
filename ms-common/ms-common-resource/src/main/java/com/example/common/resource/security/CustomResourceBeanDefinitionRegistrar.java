@@ -8,7 +8,8 @@ import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
 
 /**
- * @Description //TODO 动态注入bean
+ * @author czx
+ * @Description //TODO 动态注入bean,覆盖原有bean
  * 需要 在yml中开启 main.allow-bean-definition-overriding: true
  * @Date 16:57 2019/4/3
  **/
@@ -25,7 +26,6 @@ public class CustomResourceBeanDefinitionRegistrar implements ImportBeanDefiniti
     @Override
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) {
         if (beanDefinitionRegistry.isBeanNameInUse(SecurityConstants.RESOURCE_SERVER_CONFIGURER)) {
-            log.warn("本地存在资源服务器配置，覆盖默认配置:" + SecurityConstants.RESOURCE_SERVER_CONFIGURER);
             return;
         }
 

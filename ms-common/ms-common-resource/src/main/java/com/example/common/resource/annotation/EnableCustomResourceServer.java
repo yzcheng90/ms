@@ -1,6 +1,5 @@
 
 package com.example.common.resource.annotation;
-
 import com.example.common.resource.security.CustomResourceBeanDefinitionRegistrar;
 import com.example.common.resource.security.RestTemplateConfig;
 import org.springframework.context.annotation.Import;
