@@ -1,5 +1,5 @@
 # MS 是一个spring cloud 开发框架
-
+### （立志成为最简洁，最好用的框架..）
 #### 项目特点
 
 - 深度定制 spring security oauth2 除了原有4种模式，还扩展支持 手机号、QQ、微信等等第三方获取token
