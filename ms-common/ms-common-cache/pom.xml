@@ -11,7 +11,11 @@
 
     <artifactId>ms-common-cache</artifactId>
     <dependencies>
-
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>ms-common-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <!--缓存依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

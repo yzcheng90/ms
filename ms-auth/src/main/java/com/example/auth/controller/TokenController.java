@@ -1,13 +1,20 @@
 package com.example.auth.controller;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.example.auth.service.AuthenticationOauthClientService;
+import com.example.auth.service.AuthenticationSocialUserService;
 import com.example.auth.service.AuthenticationUserService;
 import com.example.auth.store.CustomRedisTokenStore;
 import com.example.common.core.constants.SecurityConstants;
 import com.example.common.core.entity.R;
+import com.example.common.core.entity.StoreUser;
 import com.example.common.core.entity.TokenEntity;
 import com.example.common.resource.entity.CustomUserDetailsUser;
+import com.example.common.user.entity.SysOauthClientDetails;
 import com.example.common.user.entity.SysUser;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,10 +31,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 @RestController
@@ -40,6 +44,7 @@ public class TokenController {
     private final RedisTemplate redisTemplate;
     private final TokenStore tokenStore;
     private final AuthenticationUserService authenticationUserService;
+    private final AuthenticationOauthClientService authenticationOauthClientService;
     /**
      * 认证页面
      *
@@ -93,14 +98,32 @@ public class TokenController {
     @RequestMapping(value = "/updateLimitLevel/{token}/{level}",method = RequestMethod.GET)
     public R updateUserLimitLevel(@PathVariable("token") String token,@PathVariable("level") int level){
         OAuth2Authentication oAuth2Auth = tokenStore.readAuthentication(token);
+        if(ObjectUtil.isNull(oAuth2Auth)) return R.errorParam(token);
         Authentication authentication = oAuth2Auth.getUserAuthentication();
-        CustomUserDetailsUser customUser = (CustomUserDetailsUser) authentication.getPrincipal();
-        customUser.setLimitLevel(level);
-        ((CustomRedisTokenStore)tokenStore).updateUserLimitLevel(customUser,token);
-        SysUser sysUser = new SysUser();
-        sysUser.setUserId(customUser.getUserId());
-        sysUser.setLimitLevel(level);
-        authenticationUserService.updateById(sysUser);
-        return R.builder().build();
+        String grantType = oAuth2Auth.getOAuth2Request().getGrantType();
+        StoreUser storeUser = new StoreUser();
+        switch (grantType){
+            case SecurityConstants.CLIENT_CREDENTIALS:
+                storeUser.setLimitLevel(level);
+                storeUser.setUserId(oAuth2Auth.getOAuth2Request().getClientId());
+                storeUser.setUserName(oAuth2Auth.getOAuth2Request().getClientId());
+                SysOauthClientDetails details = new SysOauthClientDetails();
+                details.setClientId(oAuth2Auth.getOAuth2Request().getClientId());
+                HashMap<String,Object> hashMap = new HashMap<>();
+                hashMap.put(SecurityConstants.LIMIT_LEVEL,level);
+                details.setAdditionalInformation(JSONUtil.toJsonStr(hashMap));
+                authenticationOauthClientService.updateById(details);
+                break;
+            default:
+                CustomUserDetailsUser customUser = (CustomUserDetailsUser) authentication.getPrincipal();
+                storeUser = StoreUser.builder().userId(customUser.getUserId()).limitLevel(customUser.getLimitLevel()).userName(customUser.getUsername()).build();
+                SysUser sysUser = new SysUser();
+                sysUser.setUserId(customUser.getUserId());
+                sysUser.setLimitLevel(level);
+                authenticationUserService.updateById(sysUser);
+                break;
+        }
+        ((CustomRedisTokenStore)tokenStore).updateUserLimitLevel(storeUser,token);
+        return R.ok();
     }
 }

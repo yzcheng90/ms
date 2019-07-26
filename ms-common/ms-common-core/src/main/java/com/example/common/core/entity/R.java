@@ -67,6 +67,14 @@ public class R<T> implements Serializable {
                 .build();
     }
 
+    public static R errorParam(Object param){
+        return R
+                .builder()
+                .code(HttpStatus.HTTP_INTERNAL_ERROR)
+                .message("param error :" + param)
+                .build();
+    }
+
     public static R error(String message){
         return R
                 .builder()

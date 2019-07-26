@@ -1,7 +1,9 @@
 package com.example.common.core.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -14,8 +16,10 @@ import java.io.Serializable;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class StoreUser implements Serializable {
-    private int userId;
+    private Object userId;
     private int limitLevel;
     private String userName;
 }

@@ -22,7 +22,6 @@ public class CustomUserDetailsUser extends User {
     @Getter
     @Setter
     private Integer limitLevel;
-
     /**
      *
      * @param userId

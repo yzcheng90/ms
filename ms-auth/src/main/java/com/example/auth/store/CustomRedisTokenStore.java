@@ -1,5 +1,7 @@
 package com.example.auth.store;
 
+import cn.hutool.core.map.MapUtil;
+import com.example.common.core.constants.SecurityConstants;
 import com.example.common.core.entity.StoreUser;
 import com.example.common.resource.entity.CustomUserDetailsUser;
 import org.springframework.data.redis.connection.RedisConnection;
@@ -168,13 +170,10 @@ public class CustomRedisTokenStore implements TokenStore {
 
 	@Override
 	public void storeAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
-		CustomUserDetailsUser customUser = (CustomUserDetailsUser) authentication.getPrincipal();
 		byte[] serializedAccessToken = serialize(token);
 		byte[] serializedAuth = serialize(authentication);
-		byte[] serializedAuthUser = serialize(StoreUser.builder().userId(customUser.getUserId()).limitLevel(customUser.getLimitLevel()).userName(customUser.getUsername()).build());
 		byte[] accessKey = serializeKey(ACCESS + token.getValue());
 		byte[] authKey = serializeKey(AUTH + token.getValue());
-		byte[] authUserKey = serializeKey(AUTH_USER + token.getValue());
 		byte[] authToAccessKey = serializeKey(AUTH_TO_ACCESS + authenticationKeyGenerator.extractKey(authentication));
 		byte[] approvalKey = serializeKey(UNAME_TO_ACCESS + getApprovalKey(authentication));
 		byte[] clientId = serializeKey(CLIENT_ID_TO_ACCESS + authentication.getOAuth2Request().getClientId());
@@ -186,7 +185,6 @@ public class CustomRedisTokenStore implements TokenStore {
 				try {
 					this.redisConnectionSet_2_0.invoke(conn, accessKey, serializedAccessToken);
 					this.redisConnectionSet_2_0.invoke(conn, authKey, serializedAuth);
-					this.redisConnectionSet_2_0.invoke(conn, authUserKey, serializedAuthUser);
 					this.redisConnectionSet_2_0.invoke(conn, authToAccessKey, serializedAccessToken);
 				} catch (Exception ex) {
 					throw new RuntimeException(ex);
@@ -194,7 +192,6 @@ public class CustomRedisTokenStore implements TokenStore {
 			} else {
 				conn.set(accessKey, serializedAccessToken);
 				conn.set(authKey, serializedAuth);
-				conn.set(authUserKey, serializedAuthUser);
 				conn.set(authToAccessKey, serializedAccessToken);
 			}
 			if (!authentication.isClientOnly()) {
@@ -205,7 +202,6 @@ public class CustomRedisTokenStore implements TokenStore {
 				int seconds = token.getExpiresIn();
 				conn.expire(accessKey, seconds);
 				conn.expire(authKey, seconds);
-				conn.expire(authUserKey, seconds);
 				conn.expire(authToAccessKey, seconds);
 				conn.expire(clientId, seconds);
 				conn.expire(approvalKey, seconds);
@@ -241,10 +237,50 @@ public class CustomRedisTokenStore implements TokenStore {
 		} finally {
 			conn.close();
 		}
+		setUserLimitLevel(token,authentication);
 	}
 
-	public void updateUserLimitLevel(CustomUserDetailsUser customUser,String token){
-		byte[] serializedAuthUser = serialize(StoreUser.builder().userId(customUser.getUserId()).limitLevel(customUser.getLimitLevel()).userName(customUser.getUsername()).build());
+	public void setUserLimitLevel(OAuth2AccessToken token, OAuth2Authentication authentication){
+		StoreUser storeUser = new StoreUser();
+		String grantType =  authentication.getOAuth2Request().getGrantType();
+		switch (grantType){
+			case SecurityConstants.CLIENT_CREDENTIALS:
+				storeUser.setLimitLevel(MapUtil.getInt(token.getAdditionalInformation(),SecurityConstants.LIMIT_LEVEL));
+				storeUser.setUserId(authentication.getOAuth2Request().getClientId());
+				storeUser.setUserName(authentication.getOAuth2Request().getClientId());
+				break;
+			default:
+				CustomUserDetailsUser customUser = (CustomUserDetailsUser) authentication.getPrincipal();
+				storeUser = StoreUser.builder().userId(customUser.getUserId()).limitLevel(customUser.getLimitLevel()).userName(customUser.getUsername()).build();
+				break;
+		}
+		byte[] serializedAuthUser = serialize(storeUser);
+		byte[] authUserKey = serializeKey(AUTH_USER + token.getValue());
+		RedisConnection conn = getConnection();
+		try {
+			if (springDataRedis_2_0) {
+				try {
+					this.redisConnectionSet_2_0.invoke(conn, authUserKey, serializedAuthUser);
+				} catch (Exception ex) {
+					throw new RuntimeException(ex);
+				}
+			} else {
+				conn.set(authUserKey, serializedAuthUser);
+			}
+
+			if (token.getExpiration() != null) {
+				int seconds = token.getExpiresIn();
+				conn.expire(authUserKey, seconds);
+			}
+			conn.closePipeline();
+		}finally {
+			conn.close();
+		}
+
+	}
+
+	public void updateUserLimitLevel(StoreUser storeUser,String token){
+		byte[] serializedAuthUser = serialize(storeUser);
 		byte[] authUserKey = serializeKey(AUTH_USER + token);
 		RedisConnection conn = getConnection();
 		try{

@@ -78,4 +78,8 @@ public interface SecurityConstants {
      * 客户端模式
      */
     String CLIENT_CREDENTIALS = "client_credentials";
+    /**
+     * 授权码模式
+     */
+    String AUTHORIZATION_CODE = "authorization_code";
 }

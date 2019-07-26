@@ -2,6 +2,7 @@ package com.example.common.interceptor.interceptor;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
+import com.example.common.cache.component.RedisUUID;
 import com.example.common.core.constants.SecurityConstants;
 import com.example.common.core.entity.R;
 import com.example.common.resource.config.AuthIgnoreConfig;
@@ -27,7 +28,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
 
     @Getter
     @Setter
-    private RedisTemplate redisTemplate;
+    private RedisUUID redisUUID;
 
     @Getter
     @Setter
@@ -41,7 +42,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
         }
         String secretKey = request.getHeader(SecurityConstants.SECRET_KEY);
         if(StrUtil.isNotBlank(secretKey)){
-            String key = (String) this.getRedisTemplate().opsForValue().get(SecurityConstants.SECRET_KEY);
+            String key = (String) redisUUID.get(SecurityConstants.SECRET_KEY);
             if(!StrUtil.isBlank(key) && secretKey.equals(key)){
                 return true;
             }

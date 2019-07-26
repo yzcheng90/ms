@@ -39,6 +39,12 @@
             <artifactId>ms-common-gateway</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>ms-common-cache</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
