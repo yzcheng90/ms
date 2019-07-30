@@ -39,9 +39,9 @@ CREATE TABLE `sys_oauth_client_details`  (
 -- ----------------------------
 -- Records of sys_oauth_client_details
 -- ----------------------------
-INSERT INTO `sys_oauth_client_details` VALUES ('api', NULL, 'api', 'server', 'client_credentials', NULL, NULL, NULL, NULL, NULL, 'true');
-INSERT INTO `sys_oauth_client_details` VALUES ('app', NULL, 'app', 'server', 'password,refresh_token', NULL, NULL, NULL, NULL, NULL, 'true');
-INSERT INTO `sys_oauth_client_details` VALUES ('cloudx', NULL, 'cloudx', 'server', 'password,refresh_token,client_credentials', 'www.baidu.com', NULL, NULL, NULL, NULL, 'true');
+INSERT INTO `sys_oauth_client_details` VALUES ('api', null, 'api', 'user', 'client_credentials', null, null, null, null, '{\"limit_level\":2}', 'true');
+INSERT INTO `sys_oauth_client_details` VALUES ('app', null, 'app', 'server', 'password,refresh_token', null, null, null, null, null, 'true');
+INSERT INTO `sys_oauth_client_details` VALUES ('cloudx', null, 'cloudx', 'server', 'password,refresh_token,client_credentials,authorization_code', 'http://baidu.com', null, null, null, null, 'true');
 
 -- ----------------------------
 -- Table structure for sys_rate_limiter

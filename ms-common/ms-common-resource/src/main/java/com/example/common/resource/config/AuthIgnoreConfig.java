@@ -1,6 +1,5 @@
 package com.example.common.resource.config;
 
-import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReUtil;
 import com.example.common.resource.annotation.AuthIgnore;
 import lombok.Getter;
@@ -8,8 +7,6 @@ import lombok.Setter;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.context.WebApplicationContext;

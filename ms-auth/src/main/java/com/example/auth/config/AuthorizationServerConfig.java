@@ -5,8 +5,8 @@ import com.example.auth.store.CustomRedisTokenStore;
 import com.example.auth.exception.CustomWebResponseExceptionTranslator;
 import com.example.auth.service.CustomClientDetailsService;
 import com.example.auth.service.CustomUserDetailsService;
+import com.example.auth.store.CustomTokenEnhancer;
 import com.example.common.core.constants.SecurityConstants;
-import com.example.common.resource.entity.CustomUserDetailsUser;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -24,12 +23,14 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.Map;
+
 
 /**
- * 认证服务器配置
- *
+ * @author czx
+ * @title: AuthorizationServerConfig
+ * @projectName ms
+ * @description: TODO 认证服务器配置
+ * @date 2019/7/2610:12
  */
 @Configuration
 @AllArgsConstructor
@@ -42,18 +43,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     /**
      * 配置OAuth2的客户端相关信息
-     * 该方法是用来验证clientId 和 clientSecret的
-     * 所以要自定义查询客户端detailsService 去数据库
-     * 去查询数据库这个客户端是否存在
      * @param clients
      */
     @Override
     @SneakyThrows
     public void configure(ClientDetailsServiceConfigurer clients) {
-        CustomClientDetailsService clientDetailsService = new CustomClientDetailsService(dataSource);
-        clientDetailsService.setSelectClientDetailsSql(SecurityConstants.DEFAULT_SELECT_STATEMENT);
-        clientDetailsService.setFindClientDetailsSql(SecurityConstants.DEFAULT_FIND_STATEMENT);
-        clients.withClientDetails(clientDetailsService);
+        clients.withClientDetails(customClientDetailsService());
     }
 
     /**
@@ -97,24 +92,26 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     /**
+     * 该方法是用来验证clientId 和 clientSecret的
+     * 所以要自定义查询客户端detailsService 去数据库
+     * 去查询数据库这个客户端是否存在
+     * @Return CustomClientDetailsService
+     **/
+    @Bean
+    public CustomClientDetailsService customClientDetailsService(){
+        CustomClientDetailsService clientDetailsService = new CustomClientDetailsService(dataSource);
+        clientDetailsService.setSelectClientDetailsSql(SecurityConstants.DEFAULT_SELECT_STATEMENT);
+        clientDetailsService.setFindClientDetailsSql(SecurityConstants.DEFAULT_FIND_STATEMENT);
+        return clientDetailsService;
+    }
+
+    /**
      * token 属性附加。
      * @return TokenEnhancer
      */
     @Bean
     public TokenEnhancer tokenEnhancer() {
-        return (accessToken, authentication) -> {
-            if (SecurityConstants.CLIENT_CREDENTIALS.equals(authentication.getOAuth2Request().getGrantType())) {
-                return accessToken;
-            }
-
-            final Map<String, Object> additionalInfo = new HashMap<>(8);
-            CustomUserDetailsUser customUserDetailsUser = (CustomUserDetailsUser) authentication.getUserAuthentication().getPrincipal();
-            additionalInfo.put(SecurityConstants.USER_ID, customUserDetailsUser.getUserId());
-            additionalInfo.put(SecurityConstants.LIMIT_LEVEL, customUserDetailsUser.getLimitLevel());
-            additionalInfo.put(SecurityConstants.USER_NAME, customUserDetailsUser.getUsername());
-            ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
-            return accessToken;
-        };
+        return new CustomTokenEnhancer(customClientDetailsService());
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.common.cache.config;
 
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ public class RedisTemplateConfig {
 	private final RedisConnectionFactory redisConnectionFactory;
 
 	@Bean
+	@ConditionalOnMissingBean(RedisTemplate.class)
 	public RedisTemplate<String, Object> redisTemplate() {
 		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
