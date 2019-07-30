@@ -49,10 +49,19 @@ MS
 │
 ├─ms-auth 统一认证服务
 ├─ms-common 系统公共模块
+│   ├─ms-common-cache 公共缓存模块
+│   ├─ms-common-core 公共组件模块
+│   ├─ms-common-feign 公共Feign模块
+│   ├─ms-common-gateway 网关限流模块
+│   ├─ms-common-interceptor 公共拦截器模块
+│   ├─ms-common-resource 公共资源服务模块
+│   ├─ms-common-user 公共用户信息
 ├─ms-config 配置中心
 ├─ms-eureka 服务注册中心
 ├─ms-gateway 网关服务
 ├─ms-services 微服务
+│   ├─ms-admin-service admin服务
+│   ├─ms-sms-service 短信服务
 
 ```
 

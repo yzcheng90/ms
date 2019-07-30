@@ -4,9 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @Slf4j
-@MapperScan(value = "com.example.auth.mapper")
+@MapperScan(value = {"com.example.auth.mapper"})
 @SpringCloudApplication
 public class AuthApplication {
 

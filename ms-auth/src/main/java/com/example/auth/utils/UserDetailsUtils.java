@@ -1,5 +1,6 @@
 package com.example.auth.utils;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.example.common.core.constants.CommonConstants;
 import com.example.common.core.constants.SecurityConstants;
@@ -24,17 +25,20 @@ public class UserDetailsUtils {
 
     /**
      * 系统用户转换userDetails
-     * @param result 用户信息
+     * @param sysUser 用户信息
      * @return
      */
-    public static UserDetails getUserDetails(SysUser result) {
-        if (result == null) {
+    public static UserDetails getUserDetails(SysUser sysUser) {
+        if (sysUser == null) {
             throw new UsernameNotFoundException("用户不存在");
         }
 
-        UserInfo info = UserInfo.builder().user(result).build();
-        Set<String> roles = new HashSet<>();
-        Collection<? extends GrantedAuthority> authorities  = AuthorityUtils.createAuthorityList(roles.toArray(new String[]{}));
+        UserInfo info = UserInfo.builder().user(sysUser).build();
+        String[] roles = new String[0];
+        if(CollUtil.isNotEmpty(sysUser.getRoleCode())){
+            roles = sysUser.getRoleCode().stream().toArray(String[]::new);
+        }
+        Collection<? extends GrantedAuthority> authorities  = AuthorityUtils.createAuthorityList(roles);
         SysUser user = info.getUser();
         boolean enabled = StrUtil.equals(user.getLockFlag(), CommonConstants.STATUS_NORMAL);
 

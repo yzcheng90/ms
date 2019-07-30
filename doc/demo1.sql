@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 17/07/2019 22:55:01
+ Date: 30/07/2019 23:09:24
 */
 
 SET NAMES utf8mb4;
@@ -67,6 +67,26 @@ INSERT INTO `sys_rate_limiter` VALUES (4, '4', '4级', 40, 40, 1);
 INSERT INTO `sys_rate_limiter` VALUES (5, '5', '5级', 500, 500, 1);
 
 -- ----------------------------
+-- Table structure for sys_role
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role`;
+CREATE TABLE `sys_role`  (
+  `role_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色名称',
+  `remark` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '备注',
+  `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建者ID',
+  `create_time` datetime(0) DEFAULT NULL COMMENT '创建时间',
+  `role_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色码oauth2用',
+  PRIMARY KEY (`role_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_role
+-- ----------------------------
+INSERT INTO `sys_role` VALUES (1, '管理员', '管理员', 1, '2019-04-18 10:12:05', 'ROLE_ADMIN');
+INSERT INTO `sys_role` VALUES (2, '测试角色', 'test', 1, '2019-07-03 22:00:59', 'ROLE_TEST');
+
+-- ----------------------------
 -- Table structure for sys_user
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
@@ -93,11 +113,28 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'admin', '$2a$10$HykYYbnn/y9IajyHmSmoOe78dIzrypa6m0cSieoA2KzVTqv840S6W', NULL, '13800000000', NULL, '2019-07-11 07:15:18', '2019-07-12 09:52:00', '0', '0', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1, 'admin', '$2a$10$HykYYbnn/y9IajyHmSmoOe78dIzrypa6m0cSieoA2KzVTqv840S6W', NULL, '13800000000', NULL, '2019-07-11 07:15:18', '2019-07-17 23:11:26', '0', '0', NULL, NULL, 2);
 INSERT INTO `sys_user` VALUES (3, 'test0', '$2a$10$GqATgNUo/6BhcbHPp1DBkO2hD6v1bjWr9db1ffKc8W7lU5vi28XZi', NULL, NULL, NULL, '2019-07-12 09:52:15', NULL, '0', '0', NULL, NULL, 1);
 INSERT INTO `sys_user` VALUES (4, 'test1', '$2a$10$OR34pxHtsUDT3QFCV5F0.eKdV6ct4AI8ngL35U.Fh2/12SOWawrH2', NULL, NULL, NULL, '2019-07-12 09:52:30', NULL, '0', '0', NULL, NULL, 1);
 INSERT INTO `sys_user` VALUES (5, 'test2', '$2a$10$/vTwhZy0rtq6Tr3H3VQ66u93XsB3ayB2xN.gVcamEO5E4fhQKsZ4C', NULL, NULL, NULL, '2019-07-12 09:52:32', '2019-07-12 15:20:21', '0', '0', NULL, NULL, 3);
 INSERT INTO `sys_user` VALUES (6, 'test3', '$2a$10$5ADM2gHUV7.K9x9cJidwde9aZP3UAK01OV07i2wvgl2uOMw3ISh7e', NULL, NULL, NULL, '2019-07-12 09:52:32', '2019-07-12 15:18:12', '0', '0', NULL, NULL, 3);
 INSERT INTO `sys_user` VALUES (7, 'test4', '$2a$10$A/j8wGtVo/JkQkD0zeNxkuEVBHXZl/zx0NYgX9mjWkRsVtfmz1Nb6', NULL, NULL, NULL, '2019-07-12 09:52:33', NULL, '0', '0', NULL, NULL, 1);
+
+-- ----------------------------
+-- Table structure for sys_user_role
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_role`;
+CREATE TABLE `sys_user_role`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
+  `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户与角色对应关系' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_user_role
+-- ----------------------------
+INSERT INTO `sys_user_role` VALUES (1, 1, 1);
+INSERT INTO `sys_user_role` VALUES (2, 2, 2);
 
 SET FOREIGN_KEY_CHECKS = 1;

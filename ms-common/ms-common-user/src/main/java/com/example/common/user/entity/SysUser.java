@@ -1,6 +1,7 @@
 package com.example.common.user.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -8,6 +9,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -76,5 +78,11 @@ public class SysUser implements Serializable {
 	 * 限流等级
 	 */
 	private Integer limitLevel;
+
+	/**
+	 * 权限码
+	 */
+	@TableField(exist = false)
+	private List<String> roleCode;
 
 }
