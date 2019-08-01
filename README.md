@@ -1,5 +1,8 @@
 # MS 是一个spring cloud 开发框架
 ### （立志成为最简洁，最好用的框架..）
+
+### 相关技术实现博客请看《[MS系列](https://blog.csdn.net/qq_15273441/article/category/9183057)》
+
 #### 项目特点
 
 - 深度定制 spring security oauth2 除了原有4种模式，还扩展支持 手机号、QQ、微信等等第三方获取token
@@ -64,7 +67,6 @@ MS
 │   ├─ms-sms-service 短信服务
 
 ```
-
 
 一起学习可以加下面QQ群，欢迎各位大神
 交流QQ群：17470566

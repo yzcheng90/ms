@@ -2,9 +2,9 @@ package com.example.auth.utils;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import com.example.auth.entity.UserInfo;
 import com.example.common.core.constants.CommonConstants;
 import com.example.common.core.constants.SecurityConstants;
-import com.example.auth.entity.UserInfo;
 import com.example.common.resource.entity.CustomUserDetailsUser;
 import com.example.common.user.entity.SysUser;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,8 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @Description //TODO 转换userDetails工具类$
