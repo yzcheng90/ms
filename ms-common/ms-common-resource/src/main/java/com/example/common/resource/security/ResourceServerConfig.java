@@ -1,9 +1,13 @@
 package com.example.common.resource.security;
 
 import com.example.common.resource.config.AuthIgnoreConfig;
+import com.example.common.resource.config.ResourcePermissionConfig;
+import com.example.common.resource.exception.CustomAccessDeniedHandler;
+import com.example.common.resource.exception.ResourceAuthExceptionEntryPoint;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
@@ -22,20 +26,20 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     private final RemoteTokenServices remoteTokenServices;
     private final RestTemplate lbRestTemplate;
     private final ResourceAuthExceptionEntryPoint resourceAuthExceptionEntryPoint;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
     private final AuthIgnoreConfig authIgnoreConfig;
+    private final ResourcePermissionConfig resourcePermissionConfig;
     /**
-     * @Description //TODO http 请求的一些过滤配置
+     * @Description //TODO http 请求的一些过滤配置,和权限配置
      **/
     @Override
     public void configure(HttpSecurity http) throws Exception {
         String[] urls = authIgnoreConfig.getIgnoreUrls().stream().distinct().toArray(String[]::new);
-        http
-            .headers().frameOptions().disable()
-            .and()
-            .authorizeRequests().antMatchers(urls).permitAll()
-            .anyRequest().authenticated()
-            .and()
-            .csrf().disable();
+        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http.authorizeRequests();
+        registry.antMatchers(urls).permitAll();
+        resourcePermissionConfig.getPermissionEntities().forEach(
+                permissionEntity -> registry.antMatchers(permissionEntity.getUrl()).hasAnyRole(permissionEntity.getPermission()));
+        registry.anyRequest().authenticated().and().csrf().disable();
     }
 
     /**
@@ -51,6 +55,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         remoteTokenServices.setRestTemplate(lbRestTemplate);
         remoteTokenServices.setAccessTokenConverter(accessTokenConverter);
         resources.authenticationEntryPoint(resourceAuthExceptionEntryPoint);
+        resources.accessDeniedHandler(customAccessDeniedHandler);
         resources.tokenServices(remoteTokenServices);
     }
 }

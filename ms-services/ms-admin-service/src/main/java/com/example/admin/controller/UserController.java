@@ -6,6 +6,7 @@ import com.example.admin.service.SysUserService;
 import com.example.common.core.base.AbstractController;
 import com.example.common.core.constants.CommonConstants;
 import com.example.common.core.entity.R;
+import com.example.common.resource.annotation.ResourcePermission;
 import com.example.common.user.entity.SysUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,7 @@ public class UserController extends AbstractController {
         return new R(sysUserService.page(page));
     }
 
+    @ResourcePermission("调用sms服务")
     @RequestMapping(value = "/sms",method = RequestMethod.GET)
     public R getSms(){
         return remoteSmsService.hello();

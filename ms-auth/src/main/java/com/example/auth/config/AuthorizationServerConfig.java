@@ -59,7 +59,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
         oauthServer
                 .allowFormAuthenticationForClients()
-                .checkTokenAccess("isAuthenticated()");
+                .checkTokenAccess("isAuthenticated()"); //allow check token
     }
 
     /**

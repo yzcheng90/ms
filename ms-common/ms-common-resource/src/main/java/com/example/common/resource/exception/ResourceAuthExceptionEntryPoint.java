@@ -1,4 +1,4 @@
-package com.example.common.resource.security;
+package com.example.common.resource.exception;
 
 import cn.hutool.http.HttpStatus;
 import com.example.common.core.entity.R;

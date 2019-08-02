@@ -1,3 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.example.common.resource.security.ResourceAuthExceptionEntryPoint,\
-  com.example.common.resource.config.AuthIgnoreConfig
+  com.example.common.resource.exception.ResourceAuthExceptionEntryPoint,\
+  com.example.common.resource.exception.CustomAccessDeniedHandler,\
+  com.example.common.resource.config.AuthIgnoreConfig,\
+  com.example.common.resource.config.ResourcePermissionConfig

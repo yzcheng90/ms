@@ -3,7 +3,7 @@ package com.example.auth.config;
 import com.example.auth.social.SocialAuthenticationFilter;
 import com.example.auth.social.SocialAuthenticationProvider;
 import com.example.auth.service.AuthenticationSocialUserService;
-import com.example.common.resource.security.ResourceAuthExceptionEntryPoint;
+import com.example.common.resource.exception.ResourceAuthExceptionEntryPoint;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;

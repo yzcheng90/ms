@@ -6,6 +6,10 @@ package com.example.common.core.constants;
 public interface SecurityConstants {
 
     /**
+     * 角色前缀
+     */
+    String ROLE = "ROLE_";
+    /**
      * 接口标识
      */
     String SECRET_KEY = "secretKey";

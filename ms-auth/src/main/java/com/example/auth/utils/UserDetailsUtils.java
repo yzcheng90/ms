@@ -34,7 +34,7 @@ public class UserDetailsUtils {
         UserInfo info = UserInfo.builder().user(sysUser).build();
         String[] roles = new String[0];
         if(CollUtil.isNotEmpty(sysUser.getRoleCode())){
-            roles = sysUser.getRoleCode().stream().toArray(String[]::new);
+            roles = sysUser.getRoleCode().stream().map(code -> SecurityConstants.ROLE + code).toArray(String[]::new);
         }
         Collection<? extends GrantedAuthority> authorities  = AuthorityUtils.createAuthorityList(roles);
         SysUser user = info.getUser();

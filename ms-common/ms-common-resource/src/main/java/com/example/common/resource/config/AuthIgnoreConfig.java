@@ -4,6 +4,7 @@ import cn.hutool.core.util.ReUtil;
 import com.example.common.resource.annotation.AuthIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -25,6 +26,7 @@ import java.util.regex.Pattern;
  * @Date  2019/7/24 19:26
  * @Author czx
  **/
+@Slf4j
 @Configurable
 @ConfigurationProperties(prefix = "security.oauth2.client.ignore-urls")
 public class AuthIgnoreConfig implements InitializingBean {
