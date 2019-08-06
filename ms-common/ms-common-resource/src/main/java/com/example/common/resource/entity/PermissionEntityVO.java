@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author czx
- * @title: PermissionEntity
+ * @title: PermissionEntityVO
  * @projectName ms
  * @description: TODO 权限对象
  * @date 2019/8/29:30
@@ -16,8 +16,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PermissionEntity {
+public class PermissionEntityVO {
     private String name;
     private String permission;
     private String url;
+    private String serviceId;
 }

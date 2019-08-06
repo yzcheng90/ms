@@ -42,7 +42,8 @@ public class AuthIgnoreConfig implements InitializingBean {
     private List<String> ignoreUrls = new ArrayList<>();
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet(){
+        log.info("===============AuthIgnoreConfig==============");
         RequestMappingHandlerMapping mapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
         Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
 

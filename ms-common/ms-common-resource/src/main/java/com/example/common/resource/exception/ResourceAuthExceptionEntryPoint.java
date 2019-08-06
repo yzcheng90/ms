@@ -10,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.common.exceptions.InvalidTokenException;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,11 +19,10 @@ import java.io.PrintWriter;
  * 客户端异常处理
  */
 @Slf4j
-@Component
 @AllArgsConstructor
 public class ResourceAuthExceptionEntryPoint implements AuthenticationEntryPoint {
 	//json 转换包
-	private final ObjectMapper objectMapper;
+	private ObjectMapper objectMapper;
 
 	@Override
 	@SneakyThrows
