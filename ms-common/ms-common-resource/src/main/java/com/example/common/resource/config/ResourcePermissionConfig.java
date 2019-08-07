@@ -3,18 +3,17 @@ package com.example.common.resource.config;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.example.common.core.component.URLConvertUtil;
+import com.example.common.rabbitmq.producer.PermissionProducer;
 import com.example.common.resource.annotation.ResourcePermission;
-import com.example.common.resource.entity.PermissionEntityVO;
-import com.example.common.resource.event.PermissionEvent;
-import com.example.common.resource.remote.RemotePermissionService;
+import com.example.common.core.entity.PermissionEntityVO;
 import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.method.HandlerMethod;
@@ -33,7 +32,7 @@ import java.util.Optional;
  * @date 2019/8/29:28
  */
 @Slf4j
-public class ResourcePermissionConfig implements InitializingBean {
+public class ResourcePermissionConfig implements ApplicationRunner {
 
     @Autowired
     private WebApplicationContext applicationContext;
@@ -42,14 +41,14 @@ public class ResourcePermissionConfig implements InitializingBean {
     private String applicationName;
 
     @Autowired
-    private ApplicationEventPublisher publisher;
+    private PermissionProducer permissionProducer;
 
     @Getter
     @Setter
     private List<PermissionEntityVO> permissionEntities = Lists.newArrayList();
 
     @Override
-    public void afterPropertiesSet(){
+    public void run(ApplicationArguments args){
         log.info("===============ResourcePermissionConfig==============");
         RequestMappingHandlerMapping mapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
         Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
@@ -91,7 +90,7 @@ public class ResourcePermissionConfig implements InitializingBean {
                             }));
         });
         if(CollUtil.isNotEmpty(permissionEntities)){
-            publisher.publishEvent(new PermissionEvent(permissionEntities));
+            permissionProducer.send(permissionEntities);
         }
     }
 }

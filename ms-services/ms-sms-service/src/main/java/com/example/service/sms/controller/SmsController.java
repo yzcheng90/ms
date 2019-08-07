@@ -3,6 +3,7 @@ package com.example.service.sms.controller;
 import com.example.common.core.base.AbstractController;
 import com.example.common.core.entity.R;
 import com.example.common.resource.annotation.AuthIgnore;
+import com.example.common.resource.annotation.ResourcePermission;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,5 +28,11 @@ public class SmsController extends AbstractController {
     @RequestMapping(value = "/hello1",method = RequestMethod.GET)
     public R hello1(){
         return R.builder().message("sms的hello1,开放接口").build();
+    }
+
+    @ResourcePermission("sms的hello2")
+    @RequestMapping(value = "/hello2",method = RequestMethod.GET)
+    public R hello2(){
+        return R.builder().message("sms的hello2,开放接口").build();
     }
 }

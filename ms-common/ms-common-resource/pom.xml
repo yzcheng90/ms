@@ -32,5 +32,11 @@
             <artifactId>spring-security-oauth2-autoconfigure</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>ms-common-rabbitmq</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
     </dependencies>
 </project>

@@ -1,5 +1,6 @@
 package com.example.service.sms;
 
+import com.example.common.feign.annotation.EnableCustomFeignClients;
 import com.example.common.resource.annotation.EnableCustomResourceServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -7,6 +8,7 @@ import org.springframework.cloud.client.SpringCloudApplication;
 
 
 @Slf4j
+@EnableCustomFeignClients
 @EnableCustomResourceServer
 @SpringCloudApplication
 public class MsSmsServiceApplication {

@@ -17,6 +17,7 @@
         <module>ms-common-feign</module>
         <module>ms-common-user</module>
         <module>ms-common-interceptor</module>
+        <module>ms-common-rabbitmq</module>
     </modules>
     <artifactId>ms-common</artifactId>
     <description>公共模块</description>

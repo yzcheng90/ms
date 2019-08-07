@@ -7,13 +7,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.admin.entity.SysPermission;
 import com.example.admin.mapper.SysPermissionMapper;
 import com.example.admin.service.SysPermissionService;
-import com.example.common.resource.entity.PermissionEntityVO;
+import com.example.common.core.entity.PermissionEntityVO;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,6 +47,14 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
                             sysPermissions.add(sysPermission);
                         });
                 sysPermissions.forEach(sys -> baseMapper.insert(sys));
+            }else {
+                permission.forEach(sys -> {
+                    SysPermission sysPermission = new SysPermission();
+                    BeanUtils.copyProperties(sys,sysPermission);
+                    sysPermission.setCreateTime(LocalDateTime.now());
+                    sysPermission.setUpdateTime(LocalDateTime.now());
+                    baseMapper.insert(sysPermission);
+                });
             }
         });
     }

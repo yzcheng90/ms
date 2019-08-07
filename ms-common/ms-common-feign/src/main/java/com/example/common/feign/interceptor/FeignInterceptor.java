@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Slf4j
 @Configuration
-public class FeignInterceptor implements RequestInterceptor {
+public class FeignInterceptor implements RequestInterceptor{
 
     @Override
     public void apply(RequestTemplate requestTemplate) {

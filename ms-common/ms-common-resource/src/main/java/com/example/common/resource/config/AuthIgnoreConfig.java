@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
  **/
 @Slf4j
 @Configurable
-@ConfigurationProperties(prefix = "security.oauth2.client.ignore-urls")
+@ConfigurationProperties(prefix = "security.oauth2.client")
 public class AuthIgnoreConfig implements InitializingBean {
 
     @Autowired

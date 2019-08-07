@@ -1,9 +1,11 @@
-package com.example.common.resource.entity;
+package com.example.common.core.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 /**
  * @author czx
@@ -16,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PermissionEntityVO {
+public class PermissionEntityVO implements Serializable {
     private String name;
     private String permission;
     private String url;
