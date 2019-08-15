@@ -13,4 +13,8 @@ public interface RabbitMQConstants {
      * 权限队列
      **/
     String PERMISSION_QUEUE = "permission_queue";
+    /**
+     * 登录日志队列
+     **/
+    String LOGIN_LOG_QUEUE = "login_log_queue";
 }

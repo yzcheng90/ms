@@ -19,4 +19,9 @@ public class RabbitMQConfig {
     public Queue permissionQueue(){
         return new Queue(RabbitMQConstants.PERMISSION_QUEUE);
     }
+
+    @Bean
+    public Queue loginLogQueue(){
+        return new Queue(RabbitMQConstants.LOGIN_LOG_QUEUE);
+    }
 }

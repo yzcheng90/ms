@@ -58,6 +58,7 @@
     <orderEntry type="library" name="Maven: io.netty:netty-resolver:4.1.33.Final" level="project" />
     <orderEntry type="library" name="Maven: io.projectreactor:reactor-core:3.2.6.RELEASE" level="project" />
     <orderEntry type="module" module-name="ms-common-core" />
+    <orderEntry type="library" name="Maven: eu.bitwalker:UserAgentUtils:1.20" level="project" />
     <orderEntry type="library" name="Maven: cn.hutool:hutool-all:4.4.5" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:4.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.1.0.RELEASE" level="project" />

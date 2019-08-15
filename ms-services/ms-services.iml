@@ -19,6 +19,7 @@
     <orderEntry type="library" name="Maven: cn.hutool:hutool-all:4.4.5" level="project" />
     <orderEntry type="module" module-name="ms-common-feign" />
     <orderEntry type="module" module-name="ms-common-core" />
+    <orderEntry type="library" name="Maven: eu.bitwalker:UserAgentUtils:1.20" level="project" />
     <orderEntry type="library" name="Maven: io.github.openfeign:feign-okhttp:10.1.0" level="project" />
     <orderEntry type="library" name="Maven: io.github.openfeign:feign-core:10.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okhttp3:okhttp:3.10.0" level="project" />

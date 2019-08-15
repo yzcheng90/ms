@@ -1,3 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.example.common.rabbitmq.config.RabbitMQConfig,\
-  com.example.common.rabbitmq.producer.PermissionProducer
+  com.example.common.rabbitmq.producer.PermissionProducer,\
+  com.example.common.rabbitmq.producer.LoginLogProducer

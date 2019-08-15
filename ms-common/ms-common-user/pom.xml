@@ -12,21 +12,10 @@
     <artifactId>ms-common-user</artifactId>
 
     <dependencies>
-        <!--hibernate-validator-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-
-        <!--mybatis plus extension,包含了mybatis plus core-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-extension</artifactId>
-        </dependency>
-        <!--mybatis-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <groupId>com.example</groupId>
+            <artifactId>ms-common-mp</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
