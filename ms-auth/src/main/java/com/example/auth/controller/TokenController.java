@@ -5,6 +5,8 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.auth.service.AuthenticationOauthClientService;
 import com.example.auth.service.AuthenticationSocialUserService;
 import com.example.auth.service.AuthenticationUserService;
@@ -17,8 +19,14 @@ import com.example.common.resource.entity.CustomUserDetailsUser;
 import com.example.common.user.entity.SysOauthClientDetails;
 import com.example.common.user.entity.SysUser;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.Cursor;
+import org.springframework.data.redis.core.RedisConnectionUtils;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -60,18 +68,35 @@ public class TokenController {
         return ENCODER.encode(password);
     }
 
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public R getTokenList(){
+    @RequestMapping(value = "/getClientList",method = RequestMethod.GET)
+    public R getClientList(Page page){
+        IPage<SysOauthClientDetails> iPage = authenticationOauthClientService.page(page);
+        return R.ok().setData(iPage);
+    }
+
+    /**
+     * 生产慎用  https://blog.csdn.net/lsblsb/article/details/73692771
+     * @param page
+     * @return
+     */
+    @SneakyThrows
+    @RequestMapping(value = "/getTokenList",method = RequestMethod.GET)
+    public R getTokenList(Page page){
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
         String prefix = SecurityConstants.MS_OAUTH_PREFIX + SecurityConstants.ACCESS + "*";
-        Set<String> keys = redisTemplate.keys(prefix);
-        List<TokenEntity> tokenEntities = new ArrayList<>();
-        if(CollUtil.isNotEmpty(keys)){
-            Iterator<String> accessKey = keys.iterator();
-            while (accessKey.hasNext()) {
-                String tokenString = accessKey.next();
-                String accessToken = StrUtil.subAfter(tokenString, SecurityConstants.MS_OAUTH_PREFIX + SecurityConstants.ACCESS, true);
+        ScanOptions options = ScanOptions.scanOptions().match(prefix).build();
+        RedisConnectionFactory factory = redisTemplate.getConnectionFactory();
+        RedisConnection rc = factory.getConnection();
+        Cursor<byte[]> cursor = rc.scan(options);
+        List<TokenEntity> tokenEntities = new ArrayList<>((int)page.getSize());
+        int tmpIndex = 0;
+        int startIndex = (int) ((page.getCurrent() - 1) * page.getSize());
+        int end = (int) (page.getCurrent() * page.getSize());
+        while (cursor.hasNext()) {
+            if (tmpIndex >= startIndex && tmpIndex < end) {
+                String value = new String(cursor.next());
+                String accessToken = StrUtil.subAfter(value, SecurityConstants.MS_OAUTH_PREFIX + SecurityConstants.ACCESS, true);
                 OAuth2AccessToken token = tokenStore.readAccessToken(accessToken);
                 TokenEntity tokenEntity = new TokenEntity();
                 tokenEntity.setToken(token.getValue());
@@ -90,10 +115,25 @@ public class TokenController {
                     }
                 }
                 tokenEntities.add(tokenEntity);
+                tmpIndex++;
+                continue;
             }
+
+            // 获取到满足条件的数据后,就可以退出了
+            if(tmpIndex >=end) {
+                break;
+            }
+
+            tmpIndex++;
+            cursor.next();
         }
-        return R.builder().data(tokenEntities).build();
+
+        RedisConnectionUtils.releaseConnection(rc, factory);
+        page.setRecords(tokenEntities);
+        page.setTotal(redisTemplate.keys(prefix).size());
+        return R.ok().setData(page);
     }
+
 
     @RequestMapping(value = "/updateLimitLevel/{token}/{level}",method = RequestMethod.GET)
     public R updateUserLimitLevel(@PathVariable("token") String token,@PathVariable("level") int level){
