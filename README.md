@@ -1,6 +1,7 @@
-# MS 是一个spring cloud 开发框架
+# MS 是一个spring cloud 基础框架，使用这套框架可以不用管怎么搭建，直接开始业务服务代码即可
 ### （立志成为最简洁，最好用的框架..）
 
+### 前台UI 使用 element-admin《[前台代码](https://github.com/yzcheng90/ms-ui)》
 ### 相关技术实现博客请看《[MS系列](https://blog.csdn.net/qq_15273441/article/category/9183057)》
 
 #### 项目特点
@@ -11,6 +12,7 @@
 - 多个服务之间调用自动维护token无感传递
 - 服务安全访问限制，只能从网关访问，不能直接访问服务 
 - 对于不需要鉴权的接口，只需要加上一个注解就可以访问了
+- RBAC 权限控制到URL级，系统启动自动同步数据库
 - 持续更新中...	
 
 #### 使用技术
@@ -29,9 +31,12 @@
 - redis 3.2+
 - lombok 插件
 - mysql 5.7+
+- rabbit mq
 
 ####  启动顺序
-
+    
+    启动前先确认 redis 和 rabbit mq 是否启动
+    
     1、MS-Eureka
     2、MS-Config
     3、MS-Auth
@@ -57,6 +62,8 @@ MS
 │   ├─ms-common-feign 公共Feign模块
 │   ├─ms-common-gateway 网关限流模块
 │   ├─ms-common-interceptor 公共拦截器模块
+│   ├─ms-common-mp 公共mybatis plus 的一些配置
+│   ├─ms-common-rabbitmq MQ生产者和一些配置
 │   ├─ms-common-resource 公共资源服务模块
 │   ├─ms-common-user 公共用户信息
 ├─ms-config 配置中心
