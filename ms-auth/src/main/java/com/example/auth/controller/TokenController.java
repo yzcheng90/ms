@@ -63,7 +63,7 @@ public class TokenController {
         return new ModelAndView("ftl/login");
     }
 
-    @RequestMapping(value = "{password}",method = RequestMethod.GET)
+    @RequestMapping(value = "/password/{password}",method = RequestMethod.GET)
     public String encodePassword(@PathVariable("password") String password){
         return ENCODER.encode(password);
     }

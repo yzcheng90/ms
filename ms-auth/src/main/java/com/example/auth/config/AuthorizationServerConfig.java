@@ -1,11 +1,13 @@
 package com.example.auth.config;
 
 
+import com.example.auth.interceptor.RequestHandlerInterceptor;
 import com.example.auth.store.CustomRedisTokenStore;
 import com.example.auth.exception.CustomWebResponseExceptionTranslator;
 import com.example.auth.service.CustomClientDetailsService;
 import com.example.auth.service.CustomUserDetailsService;
 import com.example.auth.store.CustomTokenEnhancer;
+import com.example.common.cache.component.RedisUUID;
 import com.example.common.core.constants.SecurityConstants;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -78,6 +80,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .authenticationManager(authenticationManagerBean)
                 .reuseRefreshTokens(false)
                 .exceptionTranslator(new CustomWebResponseExceptionTranslator());
+        endpoints.addInterceptor(new RequestHandlerInterceptor(redisUUID()));
+    }
+
+    @Bean
+    public RedisUUID redisUUID(){
+        return new RedisUUID();
     }
 
     /**

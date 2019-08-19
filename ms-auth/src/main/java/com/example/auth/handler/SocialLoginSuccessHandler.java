@@ -3,6 +3,7 @@ package com.example.auth.handler;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.CharsetUtil;
+import com.example.auth.utils.AuthUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Builder;
 import lombok.SneakyThrows;
@@ -32,7 +33,6 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 @Builder
 public class SocialLoginSuccessHandler implements AuthenticationSuccessHandler {
-	private static final String BASIC_ = "Basic ";
 	private ObjectMapper objectMapper;
 	private PasswordEncoder passwordEncoder;
 	private ClientDetailsService clientDetailsService;
@@ -50,12 +50,12 @@ public class SocialLoginSuccessHandler implements AuthenticationSuccessHandler {
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
 		String header = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-		if (header == null || !header.startsWith(BASIC_)) {
+		if (header == null || !header.startsWith(AuthUtils.BASIC_)) {
 			throw new UnapprovedClientAuthenticationException("请求头中client信息为空");
 		}
 
 		try {
-			String[] tokens = getClientDetails(header);
+			String[] tokens = AuthUtils.getClientDetails(header);
 			assert tokens.length == 2;
 			String clientId = tokens[0];
 
@@ -84,25 +84,4 @@ public class SocialLoginSuccessHandler implements AuthenticationSuccessHandler {
 		}
 
 	}
-
-	@SneakyThrows
-	public String[] getClientDetails(String header){
-		byte[] base64Token = header.substring(6).getBytes("UTF-8");
-		byte[] decoded;
-		try {
-			decoded = Base64.decode(base64Token);
-		} catch (IllegalArgumentException e) {
-			throw new RuntimeException("客户端信息无效");
-		}
-
-		String token = new String(decoded, StandardCharsets.UTF_8);
-
-		int index = token.indexOf(":");
-		if (index == -1) {
-			throw new RuntimeException("客户端信息无效");
-		}
-		return new String[]{token.substring(0, index), token.substring(index + 1)};
-	}
-
-
 }

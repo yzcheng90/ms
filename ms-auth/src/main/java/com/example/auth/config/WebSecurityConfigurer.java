@@ -1,6 +1,7 @@
 package com.example.auth.config;
 
 import com.example.auth.handler.SocialLoginSuccessHandler;
+import com.example.common.cache.component.RedisUUID;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
@@ -53,16 +55,16 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             .antMatchers(
-                    "/token/**", // 不拦截
-                    // "/token/form", // 不拦截
+                    "/", // 根目录 不拦截 具体看博客 https://www.cnblogs.com/yyxxn/p/8808851.html
+                    "/authority/**", // 不拦截
                     "/actuator/**", //actuator（监控） 开头不拦截
                     "/social/**")  //social（第三方登录） 开头不拦截
             .permitAll()
             .anyRequest().authenticated()
             .and().csrf().disable()
             .formLogin()
-            .loginPage("/token/login") //配置统一登录页 重定向到 /token/login
-            .loginProcessingUrl("/token/form") //配置统一登录方法提交方法
+            .loginPage("/authority/login") //配置统一登录页 重定向到 /token/login
+            .loginProcessingUrl("/authority/form") //配置统一登录方法提交方法   authority
             .and()
             .apply(socialSecurityConfigurer()); //添加第三方 认证配置
     }
@@ -79,6 +81,11 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder())
                 .defaultAuthorizationServerTokenServices(defaultAuthorizationServerTokenServices)
                 .build();
+    }
+
+    @Bean
+    public RedisUUID redisUUID(){
+        return new RedisUUID();
     }
 
     /**
