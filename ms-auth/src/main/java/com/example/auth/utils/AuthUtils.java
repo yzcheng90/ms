@@ -17,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 public class AuthUtils {
 
     public static final String BASIC_ = "Basic ";
+    public static final String GRANT_TYPE = "grant_type";
     public static final String CLIENT_CREDENTIALS = "client_credentials";
     public static final String PASSWORD = "password";
     public static final String REFRESH_TOKEN = "refresh_token";

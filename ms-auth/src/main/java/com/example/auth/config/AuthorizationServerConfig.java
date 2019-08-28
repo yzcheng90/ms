@@ -1,16 +1,14 @@
 package com.example.auth.config;
 
 
-import com.example.auth.interceptor.RequestHandlerInterceptor;
-import com.example.auth.store.CustomRedisTokenStore;
 import com.example.auth.exception.CustomWebResponseExceptionTranslator;
 import com.example.auth.service.CustomClientDetailsService;
 import com.example.auth.service.CustomUserDetailsService;
+import com.example.auth.store.CustomRedisTokenStore;
 import com.example.auth.store.CustomTokenEnhancer;
-import com.example.common.cache.component.RedisUUID;
 import com.example.common.core.constants.SecurityConstants;
-import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -35,13 +33,20 @@ import javax.sql.DataSource;
  * @date 2019/7/2610:12
  */
 @Configuration
-@AllArgsConstructor
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-    private final DataSource dataSource;
-    private final CustomUserDetailsService customUserDetailsService;
-    private final AuthenticationManager authenticationManagerBean;
-    private final RedisConnectionFactory redisConnectionFactory;
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
+
+    @Autowired
+    private AuthenticationManager authenticationManagerBean;
+
+    @Autowired
+    private RedisConnectionFactory redisConnectionFactory;
 
     /**
      * 配置OAuth2的客户端相关信息
@@ -54,8 +59,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     /**
-     * 配置AuthorizationServer安全认证的相关信息，创建ClientCredentialsTokenEndpointFilter核心过滤器
-     * @Description //TODO  这个方法不配置的话 在check_token 的时候会报 禁止访问
+     *  配置AuthorizationServer安全认证的相关信息，创建ClientCredentialsTokenEndpointFilter核心过滤器
      **/
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
@@ -80,12 +84,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .authenticationManager(authenticationManagerBean)
                 .reuseRefreshTokens(false)
                 .exceptionTranslator(new CustomWebResponseExceptionTranslator());
-        endpoints.addInterceptor(new RequestHandlerInterceptor(redisUUID()));
-    }
-
-    @Bean
-    public RedisUUID redisUUID(){
-        return new RedisUUID();
     }
 
     /**

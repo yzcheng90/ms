@@ -83,6 +83,14 @@ public class R<T> implements Serializable {
                 .build();
     }
 
+    public static R error(int code,String message){
+        return R
+                .builder()
+                .code(code)
+                .message(message)
+                .build();
+    }
+
     public static R ok(Object data){
         return R
                 .builder()

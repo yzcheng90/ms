@@ -1,14 +1,11 @@
 package com.example.auth.controller;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.auth.service.AuthenticationOauthClientService;
-import com.example.auth.service.AuthenticationSocialUserService;
 import com.example.auth.service.AuthenticationUserService;
 import com.example.auth.store.CustomRedisTokenStore;
 import com.example.common.core.constants.SecurityConstants;
@@ -39,7 +36,9 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @Slf4j
 @RestController

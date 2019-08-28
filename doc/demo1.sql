@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80016
 File Encoding         : 65001
 
-Date: 2019-08-15 17:26:42
+Date: 2019-08-28 16:27:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,6 +25,7 @@ CREATE TABLE `sys_login_log` (
   `request_uri` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '接口URL',
   `request_host` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '请求HOST',
   `request_ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '请求IP',
+  `request_detail` varchar(255) DEFAULT NULL COMMENT '请求IP详细信息',
   `request_method` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '请求方式',
   `user_agent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '用户代理',
   `grant_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '登录模式',
@@ -33,12 +34,13 @@ CREATE TABLE `sys_login_log` (
   `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'token',
   `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '登录时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='登录日志';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='登录日志';
 
 -- ----------------------------
 -- Records of sys_login_log
 -- ----------------------------
-INSERT INTO `sys_login_log` VALUES ('1', '用户登录', '/oauth/token', null, '192.168.0.133', 'POST', 'PostmanRuntime/7.15.2', 'password', 'admin', null, 'd34e213e-eba4-4d1c-a319-5cb501e55bac', '2019-08-15 17:26:09');
+INSERT INTO `sys_login_log` VALUES ('20', '用户登录', '/oauth/token', null, '0:0:0:0:0:0:0:1', null, 'POST', 'PostmanRuntime/7.15.2', 'password', 'test0', 'cloudx', null, '2019-08-28 16:19:18');
+INSERT INTO `sys_login_log` VALUES ('21', '用户登录', '/oauth/token', null, '0:0:0:0:0:0:0:1', null, 'POST', 'PostmanRuntime/7.15.2', 'password', 'test0', 'cloudx', null, '2019-08-28 16:19:37');
 
 -- ----------------------------
 -- Table structure for sys_oauth_client_details

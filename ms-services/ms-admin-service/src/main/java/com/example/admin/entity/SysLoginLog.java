@@ -37,6 +37,8 @@ public class SysLoginLog extends BaseRequestEntity<SysLoginLog> implements Seria
     private String request_host;
     //请求IP
     private String request_ip;
+    //请求IP详细信息
+    private String request_detail;
     //请求方式
     private String request_method;
     //用户代理

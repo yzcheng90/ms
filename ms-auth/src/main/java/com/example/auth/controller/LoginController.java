@@ -1,31 +1,32 @@
 package com.example.auth.controller;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.example.auth.entity.LoginVO;
-import com.example.auth.exception.CustomOAuth2Exception;
 import com.example.auth.utils.AuthUtils;
+import com.example.common.cache.component.RedisUUID;
 import com.example.common.core.constants.SecurityConstants;
 import com.example.common.core.constants.ServiceNameConstants;
 import com.example.common.core.entity.R;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 
 /**
@@ -43,6 +44,9 @@ public class LoginController {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private RedisUUID redisUUID;
 
     /**
      * 认证页面
@@ -74,6 +78,7 @@ public class LoginController {
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.set(HttpHeaders.AUTHORIZATION, header);
+        httpHeaders.set(SecurityConstants.SECRET_KEY, redisUUID.create(SecurityConstants.SECRET_KEY));
 
         //授权请求信息
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
@@ -105,7 +110,20 @@ public class LoginController {
                 return R.error("无效认证模式"+vo.getGrant_type());
         }
         HttpEntity httpEntity = new HttpEntity(map, httpHeaders);
-        ResponseEntity<OAuth2AccessToken> body = restTemplate.exchange("lb://"+ServiceNameConstants.MS_AUTH_SERVICE + uri, HttpMethod.POST, httpEntity, OAuth2AccessToken.class);
-        return R.ok().setData(body);
+        ResponseEntity<OAuth2AccessToken> body = null;
+        try{
+            body = restTemplate.exchange(
+                    "http://"+ ServiceNameConstants.MS_AUTH_SERVICE + uri,
+                    HttpMethod.POST,
+                    httpEntity, OAuth2AccessToken.class);
+        }catch (HttpClientErrorException e){
+            JSONObject jsonObject = JSONUtil.parseObj(e.getResponseBodyAsString());
+            return R.error(jsonObject.getInt("code"),jsonObject.getStr("msg"));
+        }
+        if(body != null && body.getStatusCode() == HttpStatus.OK){
+            return R.ok().setData(body.getBody());
+        }else {
+            return R.error("认证错误");
+        }
     }
 }

@@ -1,8 +1,9 @@
-# MS 是一个spring cloud 基础框架，使用这套框架可以不用管怎么搭建，直接开始业务服务代码即可
-### （立志成为最简洁，最好用的框架..）
+### MS 是一个spring cloud 基础框架，使用这套框架可以不用管怎么搭建，直接开始业务服务代码即可
+##### （立志成为最简洁，最好用的框架..）
 
-### 前台UI 使用 element-admin《[前台代码](https://github.com/yzcheng90/ms-ui)》
-### 相关技术实现博客请看《[MS系列](https://blog.csdn.net/qq_15273441/article/category/9183057)》
+>  前台UI 使用 element-admin《[前台代码](https://github.com/yzcheng90/ms-ui)》
+
+> 相关技术实现博客请看《[MS系列](https://blog.csdn.net/qq_15273441/article/category/9183057)》
 
 #### 项目特点
 
@@ -13,6 +14,7 @@
 - 服务安全访问限制，只能从网关访问，不能直接访问服务 
 - 对于不需要鉴权的接口，只需要加上一个注解就可以访问了
 - RBAC 权限控制到URL级，系统启动自动同步数据库
+- 新增oauth2认证日志
 - 持续更新中...	敬请关注
 
 #### 使用技术
@@ -53,7 +55,7 @@
 #### 项目目录
 ```
 MS
-├─doc  项目SQL语句
+├─doc  项目SQL语句  [demo1.sql] 5.7+版本推荐 ,[demo1_5.7.sql] 5.7版本，sql不是最新的
 │
 ├─ms-auth 统一认证服务
 ├─ms-common 系统公共模块
