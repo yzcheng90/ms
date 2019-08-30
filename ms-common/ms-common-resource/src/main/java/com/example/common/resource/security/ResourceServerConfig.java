@@ -24,7 +24,7 @@ import org.springframework.web.client.RestTemplate;
 @AllArgsConstructor
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     private final RemoteTokenServices remoteTokenServices;
-    private final RestTemplate lbRestTemplate;
+    private final RestTemplate restTemplate;
     private final ResourceAuthExceptionEntryPoint resourceAuthExceptionEntryPoint;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
     private final AuthIgnoreConfig authIgnoreConfig;
@@ -52,7 +52,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         UserAuthenticationConverter userTokenConverter = new CustomUserAuthenticationConverter();
         accessTokenConverter.setUserTokenConverter(userTokenConverter);
 
-        remoteTokenServices.setRestTemplate(lbRestTemplate);
+        remoteTokenServices.setRestTemplate(restTemplate);
         remoteTokenServices.setAccessTokenConverter(accessTokenConverter);
         resources.authenticationEntryPoint(resourceAuthExceptionEntryPoint);
         resources.accessDeniedHandler(customAccessDeniedHandler);

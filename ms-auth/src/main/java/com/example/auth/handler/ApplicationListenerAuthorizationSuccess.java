@@ -1,5 +1,6 @@
 package com.example.auth.handler;
 
+import cn.hutool.core.util.StrUtil;
 import com.example.auth.utils.AuthUtils;
 import com.example.common.core.component.IPUtils;
 import com.example.common.core.entity.SysLoginLogVO;
@@ -37,9 +38,12 @@ public class ApplicationListenerAuthorizationSuccess implements ApplicationListe
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = servletRequestAttributes.getRequest();
         String grantType = request.getParameter(AuthUtils.GRANT_TYPE);
+        if(StrUtil.isBlank(grantType)){
+            return;
+        }
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         String ip = IPUtils.getIpAddress(request);
-        String detail = IPUtils.getAddressDetail(ip);
+        // String detail = IPUtils.getAddressDetail(ip);  调用接口 可能超时...导致认证可能出错 或调用时间太长，后面做一个定时任务去做吧
         SysLoginLogVO sysLoginLogVO = SysLoginLogVO
                 .builder()
                 .grant_type(grantType)
@@ -47,7 +51,7 @@ public class ApplicationListenerAuthorizationSuccess implements ApplicationListe
                 .user_agent(request.getHeader("User-Agent"))
                 .request_method(request.getMethod())
                 .request_ip(ip)
-                .request_detail(detail)
+               // .request_detail(detail)
                 .build();
         Authentication authentication = authenticationSuccessEvent.getAuthentication();
         switch (grantType){

@@ -22,7 +22,7 @@ public class RestTemplateConfig {
     @Bean
     @Primary
     @LoadBalanced
-    public RestTemplate lbRestTemplate() {
+    public RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setErrorHandler(new DefaultResponseErrorHandler() {
             @Override

@@ -56,6 +56,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
             .antMatchers(
                     "/", // 根目录 不拦截 具体看博客 https://www.cnblogs.com/yyxxn/p/8808851.html
                     "/authority/**", // 不拦截
+                    "/token/**", // 不拦截
                     "/actuator/**", //actuator（监控） 开头不拦截
                     "/social/**")  //social（第三方登录） 开头不拦截
             .permitAll()
