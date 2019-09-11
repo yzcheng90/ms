@@ -1,12 +1,12 @@
-package com.example.admin.service.impl;
+package com.example.auth.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.admin.entity.SysPermission;
-import com.example.admin.mapper.SysPermissionMapper;
-import com.example.admin.service.SysPermissionService;
+import com.example.auth.entity.SysPermission;
+import com.example.auth.mapper.SysPermissionMapper;
+import com.example.auth.service.SysPermissionService;
 import com.example.common.core.entity.PermissionEntityVO;
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;

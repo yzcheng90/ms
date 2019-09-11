@@ -12,6 +12,8 @@ import com.example.common.core.constants.SecurityConstants;
 import com.example.common.core.entity.R;
 import com.example.common.core.entity.StoreUser;
 import com.example.common.core.entity.TokenEntity;
+import com.example.common.resource.annotation.AuthIgnore;
+import com.example.common.resource.annotation.ResourcePermission;
 import com.example.common.resource.entity.CustomUserDetailsUser;
 import com.example.common.user.entity.SysOauthClientDetails;
 import com.example.common.user.entity.SysUser;
@@ -36,6 +38,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +60,7 @@ public class TokenController {
      *
      * @return ModelAndView
      */
+    @AuthIgnore
     @GetMapping("/login")
     public ModelAndView require() {
         return new ModelAndView("ftl/login");
@@ -78,6 +82,7 @@ public class TokenController {
      * @param page
      * @return
      */
+    @ResourcePermission("获取token列表")
     @SneakyThrows
     @RequestMapping(value = "/getTokenList",method = RequestMethod.GET)
     public R getTokenList(Page page){
@@ -99,7 +104,8 @@ public class TokenController {
                 OAuth2AccessToken token = tokenStore.readAccessToken(accessToken);
                 TokenEntity tokenEntity = new TokenEntity();
                 tokenEntity.setToken(token.getValue());
-                tokenEntity.setExpiration(token.getExpiration());
+                // 默认时区为东8区
+                tokenEntity.setExpiration(token.getExpiration().toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime());
                 OAuth2Authentication oAuth2Auth = tokenStore.readAuthentication(token);
                 Authentication authentication = oAuth2Auth.getUserAuthentication();
                 tokenEntity.setClientId(oAuth2Auth.getOAuth2Request().getClientId());

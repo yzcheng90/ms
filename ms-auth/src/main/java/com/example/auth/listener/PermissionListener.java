@@ -1,7 +1,7 @@
-package com.example.admin.listener;
+package com.example.auth.listener;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.example.admin.service.SysPermissionService;
+import com.example.auth.service.SysPermissionService;
 import com.example.common.core.entity.PermissionEntityVO;
 import com.example.common.rabbitmq.constants.RabbitMQConstants;
 import lombok.AllArgsConstructor;

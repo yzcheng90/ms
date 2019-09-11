@@ -37,10 +37,10 @@ public class UserController extends AbstractController {
     private int count = 0;
 
     @RequestMapping(value = "/getUser/{id}", method = RequestMethod.GET)
-    public SysUser getUser(@PathVariable("id") Integer id) {
+    public R getUser(@PathVariable("id") Integer id) {
         count++;
         log.info("===================次数：{},port：{}=================", count, port);
-        return sysUserService.getUserById(id);
+        return R.ok(sysUserService.getUserById(id));
     }
 
     @RequestMapping(value = "/createUser", method = RequestMethod.GET)

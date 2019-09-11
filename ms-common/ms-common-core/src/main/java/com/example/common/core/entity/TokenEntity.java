@@ -1,7 +1,9 @@
 package com.example.common.core.entity;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -15,7 +17,8 @@ import java.util.Date;
 public class TokenEntity {
 
     private String token;
-    private Date expiration;
+    @DateTimeFormat
+    private LocalDateTime expiration;
     private Integer userId;
     private String username;
     private String clientId;

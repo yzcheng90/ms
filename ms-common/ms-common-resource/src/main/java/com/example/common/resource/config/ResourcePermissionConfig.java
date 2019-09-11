@@ -10,6 +10,7 @@ import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -32,7 +33,7 @@ import java.util.Optional;
  * @date 2019/8/29:28
  */
 @Slf4j
-public class ResourcePermissionConfig implements ApplicationRunner {
+public class ResourcePermissionConfig implements InitializingBean {
 
     @Autowired
     private WebApplicationContext applicationContext;
@@ -48,7 +49,7 @@ public class ResourcePermissionConfig implements ApplicationRunner {
     private List<PermissionEntityVO> permissionEntities = Lists.newArrayList();
 
     @Override
-    public void run(ApplicationArguments args){
+    public void afterPropertiesSet(){
         log.info("===============ResourcePermissionConfig==============");
         RequestMappingHandlerMapping mapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
         Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();

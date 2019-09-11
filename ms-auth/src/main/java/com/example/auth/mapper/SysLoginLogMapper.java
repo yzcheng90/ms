@@ -1,7 +1,7 @@
-package com.example.admin.mapper;
+package com.example.auth.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.admin.entity.SysLoginLog;
+import com.example.auth.entity.SysLoginLog;
 
 /**
  * 登录日志

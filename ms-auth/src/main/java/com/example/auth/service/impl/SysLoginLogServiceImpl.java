@@ -1,11 +1,10 @@
-package com.example.admin.service.impl;
+package com.example.auth.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.admin.entity.SysLoginLog;
-import com.example.admin.mapper.SysLoginLogMapper;
-import com.example.admin.service.SysLoginLogService;
+import com.example.auth.entity.SysLoginLog;
+import com.example.auth.mapper.SysLoginLogMapper;
+import com.example.auth.service.SysLoginLogService;
 import org.springframework.stereotype.Service;
-
 
 
 @Service

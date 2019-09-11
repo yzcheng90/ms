@@ -2,6 +2,8 @@ package com.example.auth.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.example.auth.entity.SysPermission;
+import com.example.auth.mapper.SysPermissionMapper;
 import com.example.auth.mapper.SysRoleMapper;
 import com.example.auth.mapper.SysUserRoleMapper;
 import com.example.auth.service.AuthenticationUserService;
@@ -30,7 +32,7 @@ import java.util.stream.Collectors;
 public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
     private final AuthenticationUserService customUserService;
     private final SysUserRoleMapper sysUserRoleMapper;
-    private final SysRoleMapper sysRoleMapper;
+    private final SysPermissionMapper sysPermissionMapper;
 
     /**
      *  通过userName去调用service 验证用户
@@ -42,15 +44,17 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
     @Cacheable(value = SecurityConstants.CACHE_USER_DETAILS, key = "#user_details", unless = "#result == null")
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SysUser sysUser = customUserService.loadUserByUsername(username);
+        //查询用户有哪些角色
         List<Long> roleIds = sysUserRoleMapper
                 .selectList(Wrappers.<SysUserRole>query().lambda().eq(SysUserRole::getUserId,sysUser.getUserId()))
                 .stream()
                 .map(SysUserRole::getRoleId)
                 .collect(Collectors.toList());
         if(CollUtil.isNotEmpty(roleIds)){
-            List<String> roleCodes = sysRoleMapper.selectList(Wrappers.<SysRole>query().lambda().in(SysRole::getRoleId,roleIds))
+            //根据角色查询权限
+            List<String> roleCodes = sysPermissionMapper.getPermission(roleIds)
                     .stream()
-                    .map(SysRole::getRoleCode)
+                    .map(SysPermission::getPermission)
                     .collect(Collectors.toList());
             sysUser.setRoleCode(roleCodes);
         }

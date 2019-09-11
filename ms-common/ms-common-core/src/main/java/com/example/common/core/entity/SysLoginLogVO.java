@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -46,6 +48,7 @@ public class SysLoginLogVO implements Serializable {
     //token
     private String token;
     //登录时间
-    private Date create_time;
+    @DateTimeFormat
+    private LocalDateTime create_time;
 
 }

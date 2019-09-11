@@ -12,6 +12,8 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
@@ -27,6 +29,9 @@ import java.time.format.DateTimeFormatter;
  * @date 2019/8/3017:31
  */
 @Configuration
+@ComponentScans(value = {
+        @ComponentScan(value = "com.example.common.*")
+})
 public class JacksonConfig {
 
     /** 默认日期时间格式 */

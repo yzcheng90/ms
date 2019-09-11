@@ -1,7 +1,7 @@
-package com.example.admin.service;
+package com.example.auth.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.admin.entity.SysPermission;
+import com.example.auth.entity.SysPermission;
 import com.example.common.core.entity.PermissionEntityVO;
 
 import java.util.List;

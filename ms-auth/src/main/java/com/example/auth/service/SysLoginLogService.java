@@ -1,8 +1,8 @@
-package com.example.admin.service;
+package com.example.auth.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.admin.entity.SysLoginLog;
+import com.example.auth.entity.SysLoginLog;
 
 /**
  * 登录日志
