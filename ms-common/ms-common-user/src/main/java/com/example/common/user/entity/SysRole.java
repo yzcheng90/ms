@@ -7,9 +7,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -54,7 +56,8 @@ public class SysRole extends Model<SysRole> implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	private Date createTime;
+	@DateTimeFormat
+	private LocalDateTime createTime;
 
 	/**
 	 * 角色码
