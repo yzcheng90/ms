@@ -42,6 +42,7 @@ public class CustomTokenEnhancer implements TokenEnhancer {
         additionalInfo.put(SecurityConstants.USER_ID, customUserDetailsUser.getUserId());
         additionalInfo.put(SecurityConstants.LIMIT_LEVEL, customUserDetailsUser.getLimitLevel());
         additionalInfo.put(SecurityConstants.USER_NAME, customUserDetailsUser.getUsername());
+        additionalInfo.put("code",200);
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
         return accessToken;
     }
