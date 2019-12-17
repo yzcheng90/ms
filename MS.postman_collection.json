@@ -1,0 +1,262 @@
+{
+	"info": {
+		"_postman_id": "7ed18ff4-b7ff-40b9-b133-453f7110d77d",
+		"name": "MS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "密码模式获取token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "cloudx",
+						"username": "cloudx"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/auth/oauth/token?username=admin&password=123456&grant_type=password&scope=server",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "admin"
+						},
+						{
+							"key": "password",
+							"value": "123456"
+						},
+						{
+							"key": "grant_type",
+							"value": "password"
+						},
+						{
+							"key": "scope",
+							"value": "server"
+						}
+					]
+				},
+				"description": "密码模式登录"
+			},
+			"response": []
+		},
+		{
+			"name": "客户端模式获取token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "api",
+						"username": "api"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/auth/oauth/token?grant_type=client_credentials&scope=server",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials"
+						},
+						{
+							"key": "scope",
+							"value": "server"
+						}
+					]
+				},
+				"description": "客户端模式登录"
+			},
+			"response": []
+		},
+		{
+			"name": "手机号模式获取token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "cloudx",
+						"username": "cloudx"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/auth/social/token/sms?code=1646&social=SMS@13800000000&grant_type=social",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"social",
+						"token",
+						"sms"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "1646"
+						},
+						{
+							"key": "social",
+							"value": "SMS@13800000000"
+						},
+						{
+							"key": "grant_type",
+							"value": "social"
+						}
+					]
+				},
+				"description": "手机号码登录"
+			},
+			"response": []
+		},
+		{
+			"name": "授权码模式获取token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.133:5000/auth/oauth/token?grant_type=authorization_code&code=79UHQW&client_id=cloudx&client_secret=cloudx&redirect_uri=http://baidu.com",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"133"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "authorization_code"
+						},
+						{
+							"key": "code",
+							"value": "79UHQW"
+						},
+						{
+							"key": "client_id",
+							"value": "cloudx"
+						},
+						{
+							"key": "client_secret",
+							"value": "cloudx"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://baidu.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取token列表",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "5942ca0f-42fd-48f8-a88e-7428edd0814e"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/auth/token/getTokenList?current=1&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"token",
+						"getTokenList"
+					],
+					"query": [
+						{
+							"key": "current",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/admin/user/getUser/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "5942ca0f-42fd-48f8-a88e-7428edd0814e"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/admin/user/getUser/1",
+				"description": "通过网关请求"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/admin/user/createUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "a6d1e622-c327-4818-a539-2858aec7bd87"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/admin/user/createUser"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/auth/token/updateLimitLevel/33093a08-fac6-4007-85cf-de3cb4d0af97/2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/auth/token/updateLimitLevel/33093a08-fac6-4007-85cf-de3cb4d0af97/2"
+			},
+			"response": []
+		}
+	]
+}

@@ -36,7 +36,7 @@
 - rabbit mq
 
 ####  启动顺序
-    
+
     启动前先确认 redis 和 rabbit mq 是否启动
     
     1、MS-Eureka
@@ -47,7 +47,7 @@
     6、MS-SMS
     
     PS：1、2 启动后其他随便
-    
+
 
 #### 系统架构图
 ![image](https://github.com/yzcheng90/MS/blob/master/doc/architecture_pic.png)
@@ -76,6 +76,17 @@ MS
 │   ├─ms-sms-service 短信服务
 
 ```
+
+### Postman 接口demo [MS.postman_collection.json](https://github.com/yzcheng90/ms/blob/master/MS.postman_collection.json)
+
+- 密码模式获取token
+
+- 客户端模式获取token
+- 手机号模式获取token
+- 授权码模式获取token
+- 获取token列表
+
+
 
 一起学习可以加下面QQ群，欢迎各位大神
 交流QQ群：17470566
