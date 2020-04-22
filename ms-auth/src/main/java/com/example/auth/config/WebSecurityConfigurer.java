@@ -63,8 +63,8 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
             .anyRequest().authenticated()
             .and().csrf().disable()
             .formLogin()
-            .loginPage("/authority/login") //配置统一登录页 重定向到 /token/login
-            .loginProcessingUrl("/authority/form") //配置统一登录方法提交方法   authority
+            .loginPage("/token/login") //配置统一登录页 重定向到 /token/login
+            .loginProcessingUrl("/token/form") //配置统一登录方法提交方法   authority
             .and()
             .apply(socialSecurityConfigurer()); //添加第三方 认证配置
     }

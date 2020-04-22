@@ -10,7 +10,11 @@
       <module fileurl="file://$PROJECT_DIR$/ms-common/ms-common-core/ms-common-core.iml" filepath="$PROJECT_DIR$/ms-common/ms-common-core/ms-common-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-common/ms-common-feign/ms-common-feign.iml" filepath="$PROJECT_DIR$/ms-common/ms-common-feign/ms-common-feign.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-common/ms-common-gateway/ms-common-gateway.iml" filepath="$PROJECT_DIR$/ms-common/ms-common-gateway/ms-common-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-common/ms-common-interceptor/ms-common-interceptor.iml" filepath="$PROJECT_DIR$/ms-common/ms-common-interceptor/ms-common-interceptor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-common/ms-common-mp/ms-common-mp.iml" filepath="$PROJECT_DIR$/ms-common/ms-common-mp/ms-common-mp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-common/ms-common-rabbitmq/ms-common-rabbitmq.iml" filepath="$PROJECT_DIR$/ms-common/ms-common-rabbitmq/ms-common-rabbitmq.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-common/ms-common-resource/ms-common-resource.iml" filepath="$PROJECT_DIR$/ms-common/ms-common-resource/ms-common-resource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-common/ms-common-user/ms-common-user.iml" filepath="$PROJECT_DIR$/ms-common/ms-common-user/ms-common-user.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-config/ms-config.iml" filepath="$PROJECT_DIR$/ms-config/ms-config.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-eureka/ms-eureka.iml" filepath="$PROJECT_DIR$/ms-eureka/ms-eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/ms-gateway/ms-gateway.iml" filepath="$PROJECT_DIR$/ms-gateway/ms-gateway.iml" />
